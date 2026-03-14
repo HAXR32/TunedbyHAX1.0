@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TunedbyHAX — Virtual Garage</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🔧</span>
+        <span class="logo-text">TunedbyHAX</span>
+        <span class="logo-tag">Virtual Garage</span>
+      </div>
+      <div class="header-actions">
+        <button id="btnAddCar" class="btn btn-primary">
+          <span>＋</span> Add Car
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats Bar -->
+  <section class="stats-bar" id="statsBar">
+    <div class="stat-card">
+      <span class="stat-value" id="statTotal">0</span>
+      <span class="stat-label">Cars</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="statMods">0</span>
+      <span class="stat-label">Total Mods</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="statSpent">$0</span>
+      <span class="stat-label">Invested</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="statNewest">—</span>
+      <span class="stat-label">Latest Build</span>
+    </div>
+  </section>
+
+  <!-- Filter / Sort Bar -->
+  <section class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input id="searchInput" type="text" placeholder="Search your garage…" />
+    </div>
+    <div class="sort-wrap">
+      <label for="sortSelect">Sort by</label>
+      <select id="sortSelect">
+        <option value="newest">Date Added</option>
+        <option value="year">Year</option>
+        <option value="make">Make</option>
+        <option value="mods">Mods</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Garage Grid -->
+  <main class="garage-grid" id="garageGrid">
+    <!-- Car cards injected here -->
+  </main>
+
+  <!-- Empty State -->
+  <div class="empty-state hidden" id="emptyState">
+    <div class="empty-icon">🚗</div>
+    <h2>Your garage is empty</h2>
+    <p>Click <strong>Add Car</strong> to park your first build.</p>
+  </div>
+
+  <!-- ==================== Add / Edit Car Modal ==================== -->
+  <div class="modal-overlay hidden" id="carModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add a Car</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+
+      <form id="carForm" novalidate>
+        <input type="hidden" id="carId" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="carYear">Year <span class="req">*</span></label>
+            <input type="number" id="carYear" placeholder="2023" min="1886" max="2099" required />
+          </div>
+          <div class="form-group">
+            <label for="carMake">Make <span class="req">*</span></label>
+            <input type="text" id="carMake" placeholder="Toyota" required />
+          </div>
+          <div class="form-group">
+            <label for="carModel">Model <span class="req">*</span></label>
+            <input type="text" id="carModel" placeholder="Supra" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="carColor">Color</label>
+            <input type="text" id="carColor" placeholder="Midnight Blue" />
+          </div>
+          <div class="form-group">
+            <label for="carMileage">Mileage</label>
+            <input type="number" id="carMileage" placeholder="45000" min="0" />
+          </div>
+          <div class="form-group">
+            <label for="carHp">Horsepower</label>
+            <input type="number" id="carHp" placeholder="320" min="0" />
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label for="carNotes">Build Notes</label>
+          <textarea id="carNotes" rows="3" placeholder="Describe this build…"></textarea>
+        </div>
+
+        <div class="form-group full">
+          <label for="carEmoji">Car Emoji / Icon</label>
+          <div class="emoji-picker" id="emojiPicker">
+            <span data-emoji="🚗">🚗</span>
+            <span data-emoji="🚙">🚙</span>
+            <span data-emoji="🏎️">🏎️</span>
+            <span data-emoji="🚕">🚕</span>
+            <span data-emoji="🚌">🚌</span>
+            <span data-emoji="🚐">🚐</span>
+            <span data-emoji="🛻">🛻</span>
+            <span data-emoji="🚑">🚑</span>
+            <span data-emoji="🚒">🚒</span>
+            <span data-emoji="🚓">🚓</span>
+            <span data-emoji="🚜">🚜</span>
+            <span data-emoji="🏍️">🏍️</span>
+          </div>
+          <input type="hidden" id="carEmoji" value="🚗" />
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="modalCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveCar">Save Car</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== Mods Modal ==================== -->
+  <div class="modal-overlay hidden" id="modsModal">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2 id="modsModalTitle">Modifications</h2>
+        <button class="modal-close" id="modsModalClose" aria-label="Close">✕</button>
+      </div>
+
+      <div class="mods-add-form">
+        <input type="hidden" id="modsCarId" />
+        <input id="modName" type="text" placeholder="Modification name…" />
+        <input id="modCost" type="number" placeholder="Cost ($)" min="0" />
+        <select id="modCategory">
+          <option value="engine">Engine</option>
+          <option value="suspension">Suspension</option>
+          <option value="exhaust">Exhaust</option>
+          <option value="aero">Aero / Body</option>
+          <option value="interior">Interior</option>
+          <option value="wheels">Wheels / Tires</option>
+          <option value="electronics">Electronics</option>
+          <option value="other">Other</option>
+        </select>
+        <button id="btnAddMod" class="btn btn-primary btn-sm">Add Mod</button>
+      </div>
+
+      <ul class="mods-list" id="modsList"></ul>
+
+      <div class="mods-total">
+        Total invested: <strong id="modsTotal">$0</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Delete Confirm Modal ==================== -->
+  <div class="modal-overlay hidden" id="deleteModal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2>Remove Car?</h2>
+        <button class="modal-close" id="deleteModalClose" aria-label="Close">✕</button>
+      </div>
+      <p class="delete-msg" id="deleteMsg">Are you sure you want to remove this car from your garage?</p>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="deleteCancelBtn">Cancel</button>
+        <button class="btn btn-danger" id="deleteConfirmBtn">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
