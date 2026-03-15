@@ -1,28 +1,442 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TunedbyHAX</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TunedbyHAX</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Hero / Landing Section ────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background-image: url('wp12363782-jdm-car-meet-wallpapers.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-title {
+      font-family: fantasy, serif;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      color: #13dc90;
+      letter-spacing: 2px;
+      margin-bottom: .4rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,.8);
+    }
+    .hero-sub {
+      font-family: fantasy, serif;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: #13bc89;
+      margin-bottom: 1.5rem;
+    }
+    .hero-desc {
+      max-width: 760px;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #d4d4d8;
+      margin-bottom: 2rem;
+    }
+    .hero-desc span { display: block; margin-top: .75rem; font-size: .85rem; color: #a1a1aa; }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .hero-shop-btn {
+      background-color: rgba(119, 223, 206, 0.80);
+      color: #0d0d0f;
+      font-family: fantasy, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: .75rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .18s, transform .18s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .hero-shop-btn:hover { background-color: rgba(119, 223, 206, 1); transform: translateY(-2px); }
+
+    .hero-garage-btn {
+      background-color: var(--accent);
+      color: #fff;
+      font-family: fantasy, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: .75rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .18s, transform .18s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .hero-garage-btn:hover { background-color: #ea6c0c; transform: translateY(-2px); }
+
+    .hero-instagram {
+      background-color: rgba(112, 77, 147, 0.80);
+      color: #e4e4e7;
+      font-family: fantasy, serif;
+      font-size: .95rem;
+      padding: .6rem 1.4rem;
+      border-radius: 8px;
+      border: 1px solid rgba(180,130,220,.4);
+      margin-bottom: 2.5rem;
+    }
+    .hero-instagram a { color: #d8b4fe; text-decoration: none; font-weight: 700; }
+    .hero-instagram a:hover { text-decoration: underline; }
+
+    /* Media grid */
+    .hero-media {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      justify-content: center;
+      max-width: 1100px;
+    }
+    .hero-media img,
+    .hero-media video {
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0,0,0,.6);
+    }
+    .hero-media img  { width: calc(25% - .75rem); min-width: 160px; height: 160px; }
+    .hero-media video { width: calc(30% - .75rem); min-width: 200px; height: 180px; }
+
+    /* Feedback */
+    .hero-feedback {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem;
+      width: 100%;
+      max-width: 600px;
+    }
+    .hero-feedback textarea {
+      width: 100%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      color: #e4e4e7;
+      font-size: .95rem;
+      padding: .75rem 1rem;
+      resize: vertical;
+      min-height: 90px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .18s;
+    }
+    .hero-feedback textarea:focus { border-color: #13dc90; }
+    .hero-feedback textarea::placeholder { color: #71717a; }
+    .hero-feedback button {
+      background: rgba(119, 223, 206, 0.75);
+      color: #0d0d0f;
+      font-family: fantasy, serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: .65rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .18s, transform .18s;
+    }
+    .hero-feedback button:hover { background: rgba(119, 223, 206, 1); transform: translateY(-1px); }
+
+    /* Section divider */
+    .section-divider {
+      text-align: center;
+      padding: 3rem 1.5rem 1rem;
+      background: var(--bg);
+    }
+    .section-divider h2 {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--accent);
+      font-family: fantasy, serif;
+      letter-spacing: 1px;
+      margin-bottom: .5rem;
+    }
+    .section-divider p { color: var(--text-muted); font-size: .95rem; max-width: 560px; margin: 0 auto; }
+
+    @media (max-width: 600px) {
+      .hero-media img  { width: calc(50% - .75rem); height: 120px; }
+      .hero-media video { width: 100%; }
+    }
+  </style>
 </head>
-<body style="color: rgb(19, 188, 137); background-image: url('wp12363782-jdm-car-meet-wallpapers.jpg'); background-size: cover; background-position: center; background-attachment: fixed; font-family: fantasy; font-size: larger;">
- <h1 style="color: rgb(19, 222, 144); font-family: fantasy;font-size: larger;">ようこそTunedbyHAX!</h1>   
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO / LANDING SECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <h1 class="hero-title"><span lang="ja">ようこそ</span> TunedbyHAX!</h1>
+    <p class="hero-sub">WELCOME TO TUNEDBYHAX</p>
+
+    <p class="hero-desc">
+      We offer <strong>JDM, EURO, and USDM</strong> Car Enthusiast Collectibles, Merchandise, and Apparel.
+      ALL APPROVED AND INSPECTED BY HAX HIMSELF. Find your favorite and enjoy a realistic
+      <strong>VIRTUAL GARAGE</strong> experience!
+      <span lang="ja">
+        ビルディング・チューニング・ディテーリング・ビニールラッピング・ビニールデカール・改造サービス
+        <em>近日公開予定</em>
+      </span>
+    </p>
+
+    <div class="hero-actions">
+      <a href="#garage" class="hero-garage-btn">🚗 ENTER VIRTUAL GARAGE</a>
+      <button class="hero-shop-btn">🛒 START SHOPPING!</button>
+    </div>
+
+    <div class="hero-instagram">
+      FOLLOW US ON INSTAGRAM FOR THE LATEST UPDATES AND EXCLUSIVE OFFERS
+      <a href="https://www.instagram.com/m0rtalHAX" target="_blank" rel="noopener">@m0rtalHAX</a>!
+    </div>
+
+    <!-- Media showcase -->
+    <div class="hero-media">
+      <img src="IMG_2402.JPG" alt="TunedbyHAX car showcase">
+      <img src="72405BAB-09B6-47B4-AB87-F1001455AA8C.jpeg" alt="TunedbyHAX car showcase">
+      <img src="wp12108808-classic-jdm-wallpapers.jpg" alt="JDM classics">
+      <img src="8186218.jpg" alt="Car enthusiast">
+      <img src="6275809.png" alt="TunedbyHAX logo">
+      <video src="Untitled video - Made with Clipchamp (2).mp4" controls></video>
+      <video src="Getaway _) - Made with Clipchamp.mp4" controls></video>
+      <video src="EPTX MK4VW - Made with Clipchamp.mp4" controls></video>
+    </div>
+
+    <!-- Feedback -->
+    <div class="hero-feedback">
+      <textarea placeholder="HOW WAS YOUR SHOPPING EXPERIENCE? WHAT CAN WE DO BETTER?"></textarea>
+      <button type="button">SUBMIT FEEDBACK</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       VIRTUAL GARAGE SECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="section-divider" id="garage">
+    <h2>🔧 VIRTUAL GARAGE</h2>
+    <p>Track, customize, and manage your personal car collection — powered by HAX.</p>
+  </div>
+
+  <!-- Site Header (Garage) -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🔧</span>
+        <span class="logo-text">TunedbyHAX</span>
+        <span class="logo-tag">Virtual Garage</span>
+      </div>
+      <button class="btn btn-primary" id="btnAddCar">+ Add Car</button>
+    </div>
+  </header>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <span class="stat-value" id="statTotal">0</span>
+      <span class="stat-label">Cars</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="statMods">0</span>
+      <span class="stat-label">Total Mods</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="statSpent">$0</span>
+      <span class="stat-label">Invested</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="statNewest" style="font-size:1rem;">—</span>
+      <span class="stat-label">Latest Addition</span>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="search" id="searchInput" placeholder="Search make, model, year…">
+    </div>
+    <div class="sort-wrap">
+      <span>Sort by</span>
+      <select id="sortSelect">
+        <option value="newest">Newest Added</option>
+        <option value="year">Year</option>
+        <option value="make">Make (A–Z)</option>
+        <option value="mods">Most Mods</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Garage Grid -->
+  <main class="garage-grid" id="garageGrid">
+    <!-- Cards injected by app.js -->
+  </main>
+
+  <!-- Empty State -->
+  <div class="empty-state hidden" id="emptyState">
+    <div class="empty-icon">🏎️</div>
+    <h2>Your garage is empty</h2>
+    <p>Hit <strong>+ Add Car</strong> above to park your first build.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ADD / EDIT CAR MODAL
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay hidden" id="carModal">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add a Car</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+      <form id="carForm" novalidate>
+        <input type="hidden" id="carId">
+
+        <!-- Row 1: Year / Make / Model -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="carYear">Year <span class="req">*</span></label>
+            <input type="number" id="carYear" placeholder="e.g. 1993" min="1886" max="2099">
+          </div>
+          <div class="form-group">
+            <label for="carMake">Make <span class="req">*</span></label>
+            <input type="text" id="carMake" placeholder="e.g. Mazda">
+          </div>
+          <div class="form-group">
+            <label for="carModel">Model <span class="req">*</span></label>
+            <input type="text" id="carModel" placeholder="e.g. RX-7">
+          </div>
+        </div>
+
+        <!-- Row 2: Color / Mileage / HP -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="carColor">Color</label>
+            <input type="text" id="carColor" placeholder="e.g. Vintage Red">
+          </div>
+          <div class="form-group">
+            <label for="carMileage">Mileage</label>
+            <input type="number" id="carMileage" placeholder="e.g. 72000" min="0">
+          </div>
+          <div class="form-group">
+            <label for="carHp">Horsepower</label>
+            <input type="number" id="carHp" placeholder="e.g. 420" min="0">
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group full">
+          <label for="carNotes">Notes / Build Description</label>
+          <textarea id="carNotes" rows="3" placeholder="Describe your build…"></textarea>
+        </div>
+
+        <!-- Emoji / Icon -->
+        <div class="form-group full">
+          <label>Car Icon</label>
+          <input type="hidden" id="carEmoji" value="🚗">
+          <div class="emoji-picker" id="emojiPicker">
+            <span data-emoji="🚗">🚗</span>
+            <span data-emoji="🏎️">🏎️</span>
+            <span data-emoji="🚙">🚙</span>
+            <span data-emoji="🛻">🛻</span>
+            <span data-emoji="🚕">🚕</span>
+            <span data-emoji="🚓">🚓</span>
+            <span data-emoji="🚑">🚑</span>
+            <span data-emoji="🚒">🚒</span>
+            <span data-emoji="🚐">🚐</span>
+            <span data-emoji="🚌">🚌</span>
+            <span data-emoji="🏍️">🏍️</span>
+            <span data-emoji="🛵">🛵</span>
+            <span data-emoji="🚜">🚜</span>
+            <span data-emoji="🚛">🚛</span>
+            <span data-emoji="⚡">⚡</span>
+            <span data-emoji="🔥">🔥</span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="modalCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveCar">Add Car</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MODIFICATIONS MODAL
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay hidden" id="modsModal">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2 id="modsModalTitle">Modifications</h2>
+        <button class="modal-close" id="modsModalClose" aria-label="Close">✕</button>
+      </div>
+      <input type="hidden" id="modsCarId">
+
+      <!-- Add a mod form -->
+      <div class="mods-add-form">
+        <select id="modCategory">
+          <option value="engine">Engine</option>
+          <option value="exhaust">Exhaust</option>
+          <option value="suspension">Suspension</option>
+          <option value="wheels">Wheels</option>
+          <option value="aero">Aero / Body</option>
+          <option value="electronics">Electronics</option>
+          <option value="interior">Interior</option>
+          <option value="brakes">Brakes</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="text" id="modName" placeholder="Mod name (e.g. Turbo Kit)">
+        <input type="number" id="modCost" placeholder="Cost $" min="0" step="0.01">
+        <button type="button" class="btn btn-primary btn-sm" id="btnAddMod">+ Add</button>
+      </div>
+
+      <!-- Mods list -->
+      <ul class="mods-list" id="modsList"></ul>
+
+      <!-- Total -->
+      <div class="mods-total">
+        Total Invested: <strong id="modsTotal">$0</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DELETE CONFIRMATION MODAL
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay hidden" id="deleteModal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2>Remove Car</h2>
+        <button class="modal-close" id="deleteModalClose" aria-label="Close">✕</button>
+      </div>
+      <p class="delete-msg" id="deleteMsg">Are you sure you want to remove this car?</p>
+      <div class="modal-footer" style="padding:.75rem 1.5rem 1.25rem;">
+        <button class="btn btn-ghost" id="deleteCancelBtn">Cancel</button>
+        <button class="btn btn-danger" id="deleteConfirmBtn">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
-<p>WELCOME 2 TUNEDBYHAX! We offer JDM,EURO, AND USDM Car Enthusiast Collectibles, Merchandise, and Apparel.  ALL APPROVED AND INSPECTED BY HAX HIMSELF. Find your favorite and enjoy a realistic VIRTUAL GARAGE experience!
-
-Building,Tuning,Detailing,Vynil Wrapping,Vynil Decals, Modifications,Content Creation and Marketing Services COMING SOON.........TUNEDBYHAXへようこそ！私たちはJDM、EURO、そしてUSDMのカーエンスージアスト向けコレクティブル、マーチャンダイズ、アパレルを提供しています。すべてHAXによって承認・検査済みです。お気に入りを見つけて、最高のバーチャルカー体験をお楽しみください！
-
-（ビルディング、チューニング、ディテーリング、ビニールラッピング、ビニールデカール、改造サービス 近日公開予定）</p>
-<textarea placeholder="HOW WAS YOUR SHOPPING EXPIERENCE, WHAT CAN WE DO BETTER ?"></textarea>
-<br>
-<button style="background-color: rgba(119, 223, 206, 0.745); color: black; font-family: fantasy; font-size: larger;padding: 10px;">START SHOPPING!</button>
-
-<p style="background-color: rgba(112, 77, 147, 0.747); color: rgb(15, 15, 15)222); font-family: fantasy; font-size: larger; padding: 10px;">FOLLOW US ON INSTAGRAM FOR THE LATEST UPDATES AND EXCLUSIVE OFFERS @m0rtalHAX!</p>
-<img src="IMG_2402.JPG" alt="Car Image" style="width: 25%; height: auto;">
-<img src="72405BAB-09B6-47B4-AB87-F1001455AA8C.jpeg" alt="Car Image" style="width: 25%; height: auto;">
-<img src="wp12108808-classic-jdm-wallpapers.jpg" alt="Car Image" style="width: 25%; height: auto;">
-<img src="8186218.jpg" alt="Car Image" style="width: 25%; height: auto;">
-<video src="Untitled video - Made with Clipchamp (2).mp4" controls style="width: 30%; height: auto;"></video>
-<img src="6275809.png" alt="Car Image" style="width: 20%; height: auto;">
-<video src="Getaway _) - Made with Clipchamp.mp4" controls style="width: 25%; height: auto;"></video>
-<video src="EPTX MK4VW - Made with Clipchamp.mp4" controls style="width: 25%; height: auto;"></video>
+</html>
