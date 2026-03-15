@@ -1,199 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TunedbyHAX — Virtual Garage</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TunedbyHAX</title>
 </head>
-<body>
-
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="logo">
-        <span class="logo-icon">🔧</span>
-        <span class="logo-text">TunedbyHAX</span>
-        <span class="logo-tag">Virtual Garage</span>
-      </div>
-      <div class="header-actions">
-        <button id="btnAddCar" class="btn btn-primary">
-          <span>＋</span> Add Car
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Stats Bar -->
-  <section class="stats-bar" id="statsBar">
-    <div class="stat-card">
-      <span class="stat-value" id="statTotal">0</span>
-      <span class="stat-label">Cars</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-value" id="statMods">0</span>
-      <span class="stat-label">Total Mods</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-value" id="statSpent">$0</span>
-      <span class="stat-label">Invested</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-value" id="statNewest">—</span>
-      <span class="stat-label">Latest Build</span>
-    </div>
-  </section>
-
-  <!-- Filter / Sort Bar -->
-  <section class="toolbar">
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input id="searchInput" type="text" placeholder="Search your garage…" />
-    </div>
-    <div class="sort-wrap">
-      <label for="sortSelect">Sort by</label>
-      <select id="sortSelect">
-        <option value="newest">Date Added</option>
-        <option value="year">Year</option>
-        <option value="make">Make</option>
-        <option value="mods">Mods</option>
-      </select>
-    </div>
-  </section>
-
-  <!-- Garage Grid -->
-  <main class="garage-grid" id="garageGrid">
-    <!-- Car cards injected here -->
-  </main>
-
-  <!-- Empty State -->
-  <div class="empty-state hidden" id="emptyState">
-    <div class="empty-icon">🚗</div>
-    <h2>Your garage is empty</h2>
-    <p>Click <strong>Add Car</strong> to park your first build.</p>
-  </div>
-
-  <!-- ==================== Add / Edit Car Modal ==================== -->
-  <div class="modal-overlay hidden" id="carModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 id="modalTitle">Add a Car</h2>
-        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-      </div>
-
-      <form id="carForm" novalidate>
-        <input type="hidden" id="carId" />
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="carYear">Year <span class="req">*</span></label>
-            <input type="number" id="carYear" placeholder="2023" min="1886" max="2099" required />
-          </div>
-          <div class="form-group">
-            <label for="carMake">Make <span class="req">*</span></label>
-            <input type="text" id="carMake" placeholder="Toyota" required />
-          </div>
-          <div class="form-group">
-            <label for="carModel">Model <span class="req">*</span></label>
-            <input type="text" id="carModel" placeholder="Supra" required />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="carColor">Color</label>
-            <input type="text" id="carColor" placeholder="Midnight Blue" />
-          </div>
-          <div class="form-group">
-            <label for="carMileage">Mileage</label>
-            <input type="number" id="carMileage" placeholder="45000" min="0" />
-          </div>
-          <div class="form-group">
-            <label for="carHp">Horsepower</label>
-            <input type="number" id="carHp" placeholder="320" min="0" />
-          </div>
-        </div>
-
-        <div class="form-group full">
-          <label for="carNotes">Build Notes</label>
-          <textarea id="carNotes" rows="3" placeholder="Describe this build…"></textarea>
-        </div>
-
-        <div class="form-group full">
-          <label for="carEmoji">Car Emoji / Icon</label>
-          <div class="emoji-picker" id="emojiPicker">
-            <span data-emoji="🚗">🚗</span>
-            <span data-emoji="🚙">🚙</span>
-            <span data-emoji="🏎️">🏎️</span>
-            <span data-emoji="🚕">🚕</span>
-            <span data-emoji="🚌">🚌</span>
-            <span data-emoji="🚐">🚐</span>
-            <span data-emoji="🛻">🛻</span>
-            <span data-emoji="🚑">🚑</span>
-            <span data-emoji="🚒">🚒</span>
-            <span data-emoji="🚓">🚓</span>
-            <span data-emoji="🚜">🚜</span>
-            <span data-emoji="🏍️">🏍️</span>
-          </div>
-          <input type="hidden" id="carEmoji" value="🚗" />
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-ghost" id="modalCancel">Cancel</button>
-          <button type="submit" class="btn btn-primary" id="btnSaveCar">Save Car</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ==================== Mods Modal ==================== -->
-  <div class="modal-overlay hidden" id="modsModal">
-    <div class="modal modal-wide">
-      <div class="modal-header">
-        <h2 id="modsModalTitle">Modifications</h2>
-        <button class="modal-close" id="modsModalClose" aria-label="Close">✕</button>
-      </div>
-
-      <div class="mods-add-form">
-        <input type="hidden" id="modsCarId" />
-        <input id="modName" type="text" placeholder="Modification name…" />
-        <input id="modCost" type="number" placeholder="Cost ($)" min="0" />
-        <select id="modCategory">
-          <option value="engine">Engine</option>
-          <option value="suspension">Suspension</option>
-          <option value="exhaust">Exhaust</option>
-          <option value="aero">Aero / Body</option>
-          <option value="interior">Interior</option>
-          <option value="wheels">Wheels / Tires</option>
-          <option value="electronics">Electronics</option>
-          <option value="other">Other</option>
-        </select>
-        <button id="btnAddMod" class="btn btn-primary btn-sm">Add Mod</button>
-      </div>
-
-      <ul class="mods-list" id="modsList"></ul>
-
-      <div class="mods-total">
-        Total invested: <strong id="modsTotal">$0</strong>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== Delete Confirm Modal ==================== -->
-  <div class="modal-overlay hidden" id="deleteModal">
-    <div class="modal modal-sm">
-      <div class="modal-header">
-        <h2>Remove Car?</h2>
-        <button class="modal-close" id="deleteModalClose" aria-label="Close">✕</button>
-      </div>
-      <p class="delete-msg" id="deleteMsg">Are you sure you want to remove this car from your garage?</p>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" id="deleteCancelBtn">Cancel</button>
-        <button class="btn btn-danger" id="deleteConfirmBtn">Remove</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+<body style="color: rgb(19, 188, 137); background-image: url('wp12363782-jdm-car-meet-wallpapers.jpg'); background-size: cover; background-position: center; background-attachment: fixed; font-family: fantasy; font-size: larger;">
+ <h1 style="color: rgb(19, 222, 144); font-family: fantasy;font-size: larger;">ようこそTunedbyHAX!</h1>   
 </body>
-</html>
+<p>WELCOME 2 TUNEDBYHAX! We offer JDM,EURO, AND USDM Car Enthusiast Collectibles, Merchandise, and Apparel.  ALL APPROVED AND INSPECTED BY HAX HIMSELF. Find your favorite and enjoy a realistic VIRTUAL GARAGE experience!
+
+Building,Tuning,Detailing,Vynil Wrapping,Vynil Decals, Modifications,Content Creation and Marketing Services COMING SOON.........TUNEDBYHAXへようこそ！私たちはJDM、EURO、そしてUSDMのカーエンスージアスト向けコレクティブル、マーチャンダイズ、アパレルを提供しています。すべてHAXによって承認・検査済みです。お気に入りを見つけて、最高のバーチャルカー体験をお楽しみください！
+
+（ビルディング、チューニング、ディテーリング、ビニールラッピング、ビニールデカール、改造サービス 近日公開予定）</p>
+<textarea placeholder="HOW WAS YOUR SHOPPING EXPIERENCE, WHAT CAN WE DO BETTER ?"></textarea>
+<br>
+<button style="background-color: rgba(119, 223, 206, 0.745); color: black; font-family: fantasy; font-size: larger;padding: 10px;">START SHOPPING!</button>
+
+<p style="background-color: rgba(112, 77, 147, 0.747); color: rgb(15, 15, 15)222); font-family: fantasy; font-size: larger; padding: 10px;">FOLLOW US ON INSTAGRAM FOR THE LATEST UPDATES AND EXCLUSIVE OFFERS @m0rtalHAX!</p>
+<img src="IMG_2402.JPG" alt="Car Image" style="width: 25%; height: auto;">
+<img src="72405BAB-09B6-47B4-AB87-F1001455AA8C.jpeg" alt="Car Image" style="width: 25%; height: auto;">
+<img src="wp12108808-classic-jdm-wallpapers.jpg" alt="Car Image" style="width: 25%; height: auto;">
+<img src="8186218.jpg" alt="Car Image" style="width: 25%; height: auto;">
+<video src="Untitled video - Made with Clipchamp (2).mp4" controls style="width: 30%; height: auto;"></video>
+<img src="6275809.png" alt="Car Image" style="width: 20%; height: auto;">
+<video src="Getaway _) - Made with Clipchamp.mp4" controls style="width: 25%; height: auto;"></video>
+<video src="EPTX MK4VW - Made with Clipchamp.mp4" controls style="width: 25%; height: auto;"></video>
