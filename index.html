@@ -215,12 +215,12 @@
     <div class="hero-media">
       <img src="IMG_2402.JPG" alt="TunedbyHAX car showcase">
       <img src="72405BAB-09B6-47B4-AB87-F1001455AA8C.jpeg" alt="TunedbyHAX car showcase">
-      <img src="wp12108808-classic-jdm-wallpapers.jpg" alt="JDM classics">
+      <img src="wp12108808-classic-jdm-wallpapers.jpg" alt="JDM classics" onerror="this.style.display='none'">
       <img src="8186218.jpg" alt="Car enthusiast">
       <img src="6275809.png" alt="TunedbyHAX logo">
-      <video src="Untitled video - Made with Clipchamp (2).mp4" controls></video>
-      <video src="Getaway _) - Made with Clipchamp.mp4" controls></video>
-      <video src="EPTX MK4VW - Made with Clipchamp.mp4" controls></video>
+      <video controls onerror="this.style.display='none'"><source src="Untitled video - Made with Clipchamp (2).mp4" onerror="this.parentNode.style.display='none'"></video>
+      <video controls onerror="this.style.display='none'"><source src="Getaway _) - Made with Clipchamp.mp4" onerror="this.parentNode.style.display='none'"></video>
+      <video controls onerror="this.style.display='none'"><source src="EPTX MK4VW - Made with Clipchamp.mp4" onerror="this.parentNode.style.display='none'"></video>
     </div>
 
     <!-- Feedback -->
@@ -438,12 +438,26 @@
   </div>
 
   <script src="app.js"></script>
-  
+
+  <!-- ═══════════════════════════════════════════════════════════
+       INSTAGRAM FEED WIDGET
+  ═══════════════════════════════════════════════════════════ -->
+  <section style="padding:2rem 1.5rem 3rem;background:var(--bg);text-align:center;">
+    <h2 style="font-family:fantasy,serif;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--accent);letter-spacing:1px;margin-bottom:.75rem;">
+      📸 LATEST FROM INSTAGRAM
+    </h2>
+    <p style="color:var(--text-muted);font-size:.95rem;margin-bottom:1.5rem;">
+      Follow <a href="https://www.instagram.com/m0rtalHAX" target="_blank" rel="noopener" style="color:#d8b4fe;font-weight:700;">@m0rtalHAX</a> for daily builds &amp; updates.
+    </p>
+    <!-- LightWidget WIDGET -->
+    <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+    <iframe src="https://cdn.lightwidget.com/widgets/96d78324de1f520a9801ea616bf1f876.html"
+            scrolling="no"
+            allowtransparency="true"
+            class="lightwidget-widget"
+            title="TunedbyHAX Instagram Feed"
+            style="width:100%;border:0;overflow:hidden;"></iframe>
+  </section>
+
 </body>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Instagram Profile Feed</title>
-    <style>
-    <body><!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="https://cdn.lightwidget.com/widgets/96d78324de1f520a9801ea616bf1f876.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+</html>
