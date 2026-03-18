@@ -40,6 +40,46 @@ app.use(cors({
   methods: ['GET', 'POST'],
 }));
 
+// ── Shipping rates ─────────────────────────────────────────────
+// Rates are in cents (USD).  Free standard shipping kicks in when
+// the merchandise subtotal reaches FREE_SHIPPING_THRESHOLD_CENTS.
+const FREE_SHIPPING_THRESHOLD_CENTS = 5000; // $50.00
+
+const SHIPPING_RATES = {
+  standard: {
+    id:          'standard',
+    label:       'Standard Shipping',
+    carrier:     'USPS / UPS Ground',
+    eta:         '5–7 business days',
+    price:       699,   // $6.99 (waived when subtotal ≥ $50)
+    description: 'Tracked delivery via USPS First Class or UPS Ground.',
+  },
+  expedited: {
+    id:          'expedited',
+    label:       'Expedited Shipping',
+    carrier:     'UPS 2-Day',
+    eta:         '2–3 business days',
+    price:       1499,  // $14.99
+    description: 'Tracked UPS 2-Day Air — arrives faster, guaranteed.',
+  },
+  overnight: {
+    id:          'overnight',
+    label:       'Overnight Shipping',
+    carrier:     'UPS Next Day Air',
+    eta:         '1 business day',
+    price:       2999,  // $29.99
+    description: 'Next-day UPS Air delivery by end of next business day.',
+  },
+  international: {
+    id:          'international',
+    label:       'International Shipping',
+    carrier:     'USPS Priority Mail International',
+    eta:         '7–21 business days',
+    price:       2499,  // $24.99
+    description: 'Worldwide tracked delivery. Duties & taxes may apply.',
+  },
+};
+
 // ── Server-side product catalogue ─────────────────────────────
 // Prices are in the smallest currency unit (cents for USD).
 // The client never sends a price — the server always looks it up
@@ -69,7 +109,7 @@ function validateCart(items) {
     return { error: 'Cart contains too many items.' };
   }
 
-  let total = 0;
+  let subtotal = 0;
 
   for (const item of items) {
     if (typeof item.id !== 'string' || !PRODUCTS[item.id]) {
@@ -79,40 +119,64 @@ function validateCart(items) {
     if (!Number.isInteger(qty) || qty < 1 || qty > 99) {
       return { error: `Invalid quantity for product ${item.id}.` };
     }
-    total += PRODUCTS[item.id].price * qty;
+    subtotal += PRODUCTS[item.id].price * qty;
   }
 
   // Stripe minimum is $0.50 USD
-  if (total < 50) {
+  if (subtotal < 50) {
     return { error: 'Order total is below the minimum charge amount.' };
   }
 
-  // Sanity cap: $10,000 per order
-  if (total > MAX_ORDER_TOTAL_CENTS) {
-    return { error: 'Order total exceeds the maximum allowed amount.' };
+  return { subtotal };
+}
+
+// ── Helper: resolve shipping cost ─────────────────────────────
+function resolveShipping(shippingMethod, subtotal) {
+  const rate = SHIPPING_RATES[shippingMethod];
+  if (!rate) {
+    return { error: `Unknown shipping method: ${shippingMethod}` };
   }
 
-  return { total };
+  // Standard shipping is free when merchandise subtotal >= threshold
+  const shippingCost =
+    shippingMethod === 'standard' && subtotal >= FREE_SHIPPING_THRESHOLD_CENTS
+      ? 0
+      : rate.price;
+
+  return { shippingCost };
 }
 
 // ── POST /create-payment-intent ────────────────────────────────
-// Body: { items: [{ id: string, qty: number }], currency?: string }
-// Returns: { clientSecret: string, total: number }
+// Body: { items: [{ id: string, qty: number }], shippingMethod: string, currency?: string }
+// Returns: { clientSecret: string, subtotal: number, shippingCost: number, total: number }
 app.post('/create-payment-intent', async (req, res) => {
   try {
-    const { items, currency = 'usd' } = req.body;
+    const { items, shippingMethod = 'standard', currency = 'usd' } = req.body;
 
     // Only USD is supported for Cash App Pay
     if (typeof currency !== 'string' || currency.toLowerCase() !== 'usd') {
       return res.status(400).json({ error: 'Only USD is supported.' });
     }
 
-    const validation = validateCart(items);
-    if (validation.error) {
-      return res.status(400).json({ error: validation.error });
+    const cartValidation = validateCart(items);
+    if (cartValidation.error) {
+      return res.status(400).json({ error: cartValidation.error });
     }
 
-    const { total } = validation;
+    const { subtotal } = cartValidation;
+
+    const shippingValidation = resolveShipping(shippingMethod, subtotal);
+    if (shippingValidation.error) {
+      return res.status(400).json({ error: shippingValidation.error });
+    }
+
+    const { shippingCost } = shippingValidation;
+    const total = subtotal + shippingCost;
+
+    // Sanity cap: $10,000 per order
+    if (total > MAX_ORDER_TOTAL_CENTS) {
+      return res.status(400).json({ error: 'Order total exceeds the maximum allowed amount.' });
+    }
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: total,
@@ -125,14 +189,41 @@ app.post('/create-payment-intent', async (req, res) => {
         items: JSON.stringify(
           items.map(i => ({ id: i.id, qty: i.qty, name: PRODUCTS[i.id].name }))
         ),
+        shippingMethod,
+        shippingCost: String(shippingCost),
       },
     });
 
-    res.json({ clientSecret: paymentIntent.client_secret, total });
+    res.json({
+      clientSecret: paymentIntent.client_secret,
+      subtotal,
+      shippingCost,
+      total,
+    });
   } catch (err) {
     console.error('[TunedbyHAX] Stripe error:', err.message);
     res.status(500).json({ error: 'Unable to create payment session. Please try again.' });
   }
+});
+
+// ── GET /shipping-rates ────────────────────────────────────────
+// Returns all available shipping methods and their prices.
+// The subtotal query param allows the server to indicate whether
+// standard shipping is free for that order.
+// Query: ?subtotal=<cents>
+app.get('/shipping-rates', (req, res) => {
+  const subtotal = Number(req.query.subtotal) || 0;
+
+  const rates = Object.values(SHIPPING_RATES).map(rate => ({
+    ...rate,
+    effectivePrice:
+      rate.id === 'standard' && subtotal >= FREE_SHIPPING_THRESHOLD_CENTS
+        ? 0
+        : rate.price,
+    freeThreshold: rate.id === 'standard' ? FREE_SHIPPING_THRESHOLD_CENTS : null,
+  }));
+
+  res.json({ rates, freeShippingThreshold: FREE_SHIPPING_THRESHOLD_CENTS });
 });
 
 // ── GET /products ──────────────────────────────────────────────

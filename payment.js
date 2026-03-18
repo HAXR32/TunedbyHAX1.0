@@ -12,6 +12,15 @@
 // Never put the secret key here.
 const STRIPE_PUBLISHABLE_KEY = 'pk_test_REPLACE_WITH_YOUR_STRIPE_PUBLISHABLE_KEY';
 
+// Warn at runtime if the key has not been replaced
+if (STRIPE_PUBLISHABLE_KEY.includes('REPLACE_WITH')) {
+  console.warn(
+    '[TunedbyHAX] WARNING: Stripe publishable key is still a placeholder.\n' +
+    'Replace STRIPE_PUBLISHABLE_KEY in payment.js with your actual key from\n' +
+    'https://dashboard.stripe.com/apikeys before accepting real payments.'
+  );
+}
+
 // ── Product catalogue (mirrors server.js) ─────────────────────
 // Prices in cents — displayed only, never sent to server.
 // The server always calculates the authoritative total.
@@ -108,8 +117,48 @@ const SHOP_PRODUCTS = [
   },
 ];
 
+// ── Shipping rates (mirrors server.js SHIPPING_RATES) ─────────
+// Prices in cents — displayed only; server is authoritative.
+const FREE_SHIPPING_THRESHOLD = 5000; // $50.00
+
+const SHIPPING_OPTIONS = [
+  {
+    id:          'standard',
+    label:       'Standard Shipping',
+    carrier:     'USPS / UPS Ground',
+    eta:         '5–7 business days',
+    price:       699,
+    description: 'Free on orders over $50',
+  },
+  {
+    id:          'expedited',
+    label:       'Expedited Shipping',
+    carrier:     'UPS 2-Day',
+    eta:         '2–3 business days',
+    price:       1499,
+    description: 'Faster delivery, guaranteed',
+  },
+  {
+    id:          'overnight',
+    label:       'Overnight Shipping',
+    carrier:     'UPS Next Day Air',
+    eta:         '1 business day',
+    price:       2999,
+    description: 'Next-day delivery by end of business',
+  },
+  {
+    id:          'international',
+    label:       'International',
+    carrier:     'USPS Priority Mail Intl',
+    eta:         '7–21 business days',
+    price:       2499,
+    description: 'Duties & taxes may apply',
+  },
+];
+
 // ── Cart state ─────────────────────────────────────────────────
-let cart = []; // [{ product, qty }]
+let cart             = []; // [{ product, qty }]
+let selectedShipping = 'standard';
 
 // ── DOM helpers ────────────────────────────────────────────────
 function $(id) { return document.getElementById(id); }
@@ -199,6 +248,18 @@ function cartTotal() {
   return cart.reduce((sum, item) => sum + item.product.price * item.qty, 0);
 }
 
+function shippingCost() {
+  const opt = SHIPPING_OPTIONS.find(o => o.id === selectedShipping);
+  if (!opt) return 0;
+  // Standard is free when merchandise subtotal >= threshold
+  if (opt.id === 'standard' && cartTotal() >= FREE_SHIPPING_THRESHOLD) return 0;
+  return opt.price;
+}
+
+function orderTotal() {
+  return cartTotal() + shippingCost();
+}
+
 function cartCount() {
   return cart.reduce((sum, item) => sum + item.qty, 0);
 }
@@ -234,7 +295,8 @@ function renderCartItems() {
     li.innerHTML = `
       <span class="cart-item-emoji">${product.emoji}</span>
       <div class="cart-item-info">
-        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}</div>        <div class="cart-item-price">${fmtPrice(product.price * qty)}</div>
+        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}</div>
+        <div class="cart-item-price">${fmtPrice(product.price * qty)}</div>
       </div>
       <div class="cart-item-qty">
         <button class="cart-qty-btn" data-id="${product.id}" data-delta="-1">−</button>
@@ -316,15 +378,65 @@ async function openCheckout() {
   const modal = $('checkoutModalOverlay');
   if (!modal) return;
 
-  $('checkoutError')  && ($('checkoutError').textContent  = '');
+  $('checkoutError')   && ($('checkoutError').textContent  = '');
   $('checkoutSuccess') && $('checkoutSuccess').classList.add('hidden');
-  $('checkoutForm')   && $('checkoutForm').classList.remove('hidden');
-  $('paymentSummary') && renderCheckoutSummary();
+  $('checkoutForm')    && $('checkoutForm').classList.remove('hidden');
+
+  renderShippingSelector();
+  renderCheckoutSummary();
 
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
 
   await initStripeElements();
+}
+
+// ── Render shipping selector inside checkout modal ─────────────
+function renderShippingSelector() {
+  const container = $('shippingSelector');
+  if (!container) return;
+  const subtotal = cartTotal();
+
+  container.innerHTML = SHIPPING_OPTIONS.map(opt => {
+    const effective =
+      opt.id === 'standard' && subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : opt.price;
+    const priceLabel = effective === 0
+      ? '<span class="ship-opt-free">FREE</span>'
+      : fmtPrice(effective);
+    const checked = selectedShipping === opt.id ? 'checked' : '';
+    return `
+      <label class="ship-opt${selectedShipping === opt.id ? ' ship-opt-selected' : ''}">
+        <input type="radio" name="shippingMethod" value="${opt.id}" ${checked} class="ship-opt-radio">
+        <div class="ship-opt-body">
+          <div class="ship-opt-top">
+            <span class="ship-opt-label">${escShop(opt.label)}</span>
+            <span class="ship-opt-price">${priceLabel}</span>
+          </div>
+          <div class="ship-opt-meta">
+            <span class="ship-opt-carrier">${escShop(opt.carrier)}</span>
+            <span class="ship-opt-eta">⏱ ${escShop(opt.eta)}</span>
+          </div>
+          <div class="ship-opt-desc">${escShop(opt.description)}</div>
+        </div>
+      </label>
+    `;
+  }).join('');
+
+  // Listen for changes and re-render summary + button
+  container.querySelectorAll('.ship-opt-radio').forEach(radio => {
+    radio.addEventListener('change', () => {
+      selectedShipping = radio.value;
+      // Update selected highlight
+      container.querySelectorAll('.ship-opt').forEach(el => {
+        el.classList.toggle('ship-opt-selected', el.querySelector('.ship-opt-radio').value === selectedShipping);
+      });
+      renderCheckoutSummary();
+      // Re-init stripe elements with new shipping to get correct total
+      const btn = $('checkoutSubmitBtn');
+      if (btn) { btn.disabled = true; btn.textContent = 'Updating…'; }
+      initStripeElements();
+    });
+  });
 }
 
 function closeCheckout() {
@@ -348,11 +460,22 @@ function renderCheckoutSummary() {
     </div>
   `).join('');
 
+  const shippingAmt = shippingCost();
+  const opt = SHIPPING_OPTIONS.find(o => o.id === selectedShipping);
+  const shippingLabel = opt ? escShop(opt.label) : 'Shipping';
+  const shippingDisplay = shippingAmt === 0
+    ? '<span class="checkout-summary-free">FREE</span>'
+    : fmtPrice(shippingAmt);
+
   summaryEl.innerHTML = `
     ${rows}
+    <div class="checkout-summary-row checkout-summary-shipping">
+      <span>📦 ${shippingLabel}</span>
+      <span>${shippingDisplay}</span>
+    </div>
     <div class="checkout-summary-total">
       <span>Total</span>
-      <span>${fmtPrice(cartTotal())}</span>
+      <span>${fmtPrice(orderTotal())}</span>
     </div>
   `;
 }
@@ -370,8 +493,9 @@ async function initStripeElements() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        items: cart.map(i => ({ id: i.product.id, qty: i.qty })),
-        currency: 'usd',
+        items:          cart.map(i => ({ id: i.product.id, qty: i.qty })),
+        shippingMethod: selectedShipping,
+        currency:       'usd',
       }),
     });
 
@@ -413,7 +537,11 @@ async function initStripeElements() {
     paymentElement.mount('#paymentElementMount');
 
     paymentElement.on('ready', () => {
-      $('checkoutSubmitBtn') && ($('checkoutSubmitBtn').disabled = false);
+      const btn = $('checkoutSubmitBtn');
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = `Pay ${fmtPrice(checkoutTotal)}`;
+      }
     });
 
   } catch (err) {

@@ -817,6 +817,191 @@ body {
 .checkout-success h3 { font-size: 1.3rem; font-weight: 800; }
 .checkout-success p { color: var(--text-muted); font-size: .9rem; }
 
+/* ---------- Shipping & Handling Section ---------- */
+.shipping-section {
+  max-width: 1280px;
+  margin: 0 auto 3.5rem;
+  padding: 0 1.5rem;
+}
+
+/* Rate cards */
+.shipping-rates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.ship-rate-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  position: relative;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  animation: fadeUp .3s ease both;
+}
+.ship-rate-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.ship-rate-card-popular {
+  border-color: var(--accent);
+}
+.ship-rate-badge {
+  position: absolute;
+  top: -.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: .2rem .6rem;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.ship-rate-icon { font-size: 2.2rem; margin-bottom: .25rem; }
+.ship-rate-label {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.ship-rate-carrier { font-size: .8rem; color: var(--text-muted); }
+.ship-rate-eta {
+  font-size: .78rem;
+  color: var(--accent2);
+  font-weight: 600;
+}
+.ship-rate-price {
+  margin-top: .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+.ship-rate-price strong {
+  font-size: 1.25rem;
+  color: var(--accent);
+  font-weight: 800;
+}
+.ship-rate-free-note {
+  font-size: .72rem;
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* Policy cards */
+.shipping-policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.ship-policy-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  animation: fadeUp .3s ease both;
+}
+.ship-policy-icon { font-size: 2rem; }
+.ship-policy-card h3 {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.ship-policy-card p {
+  font-size: .84rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.ship-policy-card p strong { color: var(--text); }
+
+/* Carrier trust bar */
+.shipping-carriers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: center;
+  padding: .5rem 0 .25rem;
+}
+.carrier-tag {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: .35rem 1rem;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: .5px;
+}
+
+/* ---------- Checkout Shipping Selector ---------- */
+.checkout-section-label {
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--text-muted);
+  margin-bottom: .6rem;
+}
+.shipping-selector {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: 1.25rem;
+}
+.ship-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: .75rem 1rem;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.ship-opt:hover { border-color: var(--accent); }
+.ship-opt-selected {
+  border-color: var(--accent);
+  background: rgba(249,115,22,.06);
+}
+.ship-opt-radio { margin-top: .2rem; accent-color: var(--accent); flex-shrink: 0; }
+.ship-opt-body { flex: 1; }
+.ship-opt-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .2rem;
+}
+.ship-opt-label { font-size: .9rem; font-weight: 700; color: var(--text); }
+.ship-opt-price { font-size: .9rem; font-weight: 800; color: var(--accent); white-space: nowrap; }
+.ship-opt-free  { color: var(--success); font-weight: 800; font-size: .85rem; }
+.ship-opt-meta {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-bottom: .15rem;
+}
+.ship-opt-carrier { font-size: .75rem; color: var(--text-muted); }
+.ship-opt-eta     { font-size: .75rem; color: var(--accent2); font-weight: 600; }
+.ship-opt-desc    { font-size: .75rem; color: var(--text-muted); margin-top: .1rem; }
+
+/* Checkout summary shipping row */
+.checkout-summary-shipping { color: var(--text-muted); }
+.checkout-summary-free { color: var(--success); font-weight: 700; }
+
 /* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--surface); }
@@ -833,6 +1018,8 @@ body {
   .shop-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
   .cart-flyout { width: 100vw; }
   .checkout-payment-label { flex-direction: column; align-items: flex-start; gap: .25rem; }
+  .shipping-rates-grid { grid-template-columns: repeat(2, 1fr); }
+  .shipping-policy-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .stats-bar { grid-template-columns: 1fr 1fr; }
@@ -840,4 +1027,5 @@ body {
   .toolbar { flex-direction: column; align-items: stretch; }
   .sort-wrap { justify-content: space-between; }
   .shop-grid { grid-template-columns: 1fr; }
+  .shipping-rates-grid { grid-template-columns: 1fr; }
 }
