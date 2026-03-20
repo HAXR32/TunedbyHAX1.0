@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TunedbyHAX</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Stripe.js — loaded before payment.js so Stripe is available globally -->
+  <script src="https://js.stripe.com/v3/" defer></script>
   <style>
     /* ── Hero / Landing Section ────────────────────────────────── */
     .hero {
@@ -74,7 +76,21 @@
       display: inline-block;
     }
     .hero-shop-btn:hover { background-color: rgba(119, 223, 206, 1); transform: translateY(-2px); }
-
+    .hero-shipping-btn {
+      background-color: rgba(249, 115, 22, 0.80);
+      color: #fff;
+      font-family: fantasy, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: .75rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .18s, transform .18s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .hero-shipping-btn:hover { background-color: rgba(249, 115, 22, 1); transform: translateY(-2px); }
     .hero-garage-btn {
       background-color: var(--accent);
       color: #fff;
@@ -202,8 +218,9 @@
     </p>
 
     <div class="hero-actions">
+      <a href="#shop" class="hero-shop-btn">🛒 SHOP NOW</a>
+      <a href="#shipping" class="hero-shipping-btn">📦 SHIPPING INFO</a>
       <a href="#garage" class="hero-garage-btn">🚗 ENTER VIRTUAL GARAGE</a>
-      <button class="hero-shop-btn">🛒 START SHOPPING!</button>
     </div>
 
     <div class="hero-instagram">
@@ -231,6 +248,125 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
+       SHOP SECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="section-divider" id="shop">
+    <h2>🛒 SHOP TUNEDBYHAX</h2>
+    <p>JDM &amp; EURO collectibles, HAX-approved merch, and exclusive accessories — all shipped worldwide.</p>
+  </div>
+
+  <section class="shop-section">
+    <div class="shop-grid" id="shopGrid">
+      <!-- Product cards injected by payment.js -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SHIPPING & HANDLING SECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="section-divider" id="shipping">
+    <h2>📦 SHIPPING &amp; HANDLING</h2>
+    <p>Fast, secure delivery worldwide — HAX ships every order with care and precision.</p>
+  </div>
+
+  <section class="shipping-section">
+
+    <!-- Shipping rate cards -->
+    <div class="shipping-rates-grid">
+
+      <div class="ship-rate-card">
+        <div class="ship-rate-icon">🇺🇸</div>
+        <div class="ship-rate-label">Standard</div>
+        <div class="ship-rate-carrier">USPS / UPS Ground</div>
+        <div class="ship-rate-eta">5–7 business days</div>
+        <div class="ship-rate-price">
+          <strong>$6.99</strong>
+          <span class="ship-rate-free-note">FREE on orders over $50</span>
+        </div>
+      </div>
+
+      <div class="ship-rate-card ship-rate-card-popular">
+        <div class="ship-rate-badge">POPULAR</div>
+        <div class="ship-rate-icon">⚡</div>
+        <div class="ship-rate-label">Expedited</div>
+        <div class="ship-rate-carrier">UPS 2-Day Air</div>
+        <div class="ship-rate-eta">2–3 business days</div>
+        <div class="ship-rate-price"><strong>$14.99</strong></div>
+      </div>
+
+      <div class="ship-rate-card">
+        <div class="ship-rate-icon">🚀</div>
+        <div class="ship-rate-label">Overnight</div>
+        <div class="ship-rate-carrier">UPS Next Day Air</div>
+        <div class="ship-rate-eta">1 business day</div>
+        <div class="ship-rate-price"><strong>$29.99</strong></div>
+      </div>
+
+      <div class="ship-rate-card">
+        <div class="ship-rate-icon">🌍</div>
+        <div class="ship-rate-label">International</div>
+        <div class="ship-rate-carrier">USPS Priority Mail Intl</div>
+        <div class="ship-rate-eta">7–21 business days</div>
+        <div class="ship-rate-price">
+          <strong>$24.99</strong>
+          <span class="ship-rate-free-note">Duties &amp; taxes may apply</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Policy grid -->
+    <div class="shipping-policy-grid">
+
+      <div class="ship-policy-card">
+        <div class="ship-policy-icon">🕐</div>
+        <h3>Order Processing</h3>
+        <p>All orders are processed and dispatched within <strong>1–2 business days</strong> of payment confirmation. Orders placed after 2 PM EST ship the following business day.</p>
+      </div>
+
+      <div class="ship-policy-card">
+        <div class="ship-policy-icon">📦</div>
+        <h3>Secure Packaging</h3>
+        <p>Every item is carefully packed using protective materials to prevent damage in transit. Collectibles and die-cast models receive double-box protection.</p>
+      </div>
+
+      <div class="ship-policy-card">
+        <div class="ship-policy-icon">🔍</div>
+        <h3>Order Tracking</h3>
+        <p>A tracking number is emailed to you as soon as your order ships. You can track in real time through the carrier's website or directly via the confirmation email.</p>
+      </div>
+
+      <div class="ship-policy-card">
+        <div class="ship-policy-icon">↩️</div>
+        <h3>Returns &amp; Exchanges</h3>
+        <p>Not satisfied? We accept returns and exchanges within <strong>30 days</strong> of delivery. Items must be unused and in original packaging. Contact us to start a return.</p>
+      </div>
+
+      <div class="ship-policy-card">
+        <div class="ship-policy-icon">🛡️</div>
+        <h3>Shipping Insurance</h3>
+        <p>All shipments over <strong>$75</strong> are automatically insured against loss or damage. For high-value orders we recommend selecting Expedited or Overnight.</p>
+      </div>
+
+      <div class="ship-policy-card">
+        <div class="ship-policy-icon">🌐</div>
+        <h3>International Orders</h3>
+        <p>We ship to <strong>120+ countries</strong>. Import duties, customs fees, and local taxes are the buyer's responsibility. Estimated delivery varies by destination.</p>
+      </div>
+
+    </div>
+
+    <!-- Carrier logos / trust bar -->
+    <div class="shipping-carriers">
+      <span class="carrier-tag">📬 USPS</span>
+      <span class="carrier-tag">🟤 UPS</span>
+      <span class="carrier-tag">🟣 FedEx</span>
+      <span class="carrier-tag">🟢 DHL (Intl)</span>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
        VIRTUAL GARAGE SECTION
   ═══════════════════════════════════════════════════════════ -->
   <div class="section-divider" id="garage">
@@ -246,7 +382,13 @@
         <span class="logo-text">TunedbyHAX</span>
         <span class="logo-tag">Virtual Garage</span>
       </div>
-      <button class="btn btn-primary" id="btnAddCar">+ Add Car</button>
+      <div class="header-actions">
+        <button class="btn btn-ghost cart-btn" id="cartBtn" aria-label="Open cart">
+          🛒 Cart
+          <span class="cart-badge hidden" id="cartBadge">0</span>
+        </button>
+        <button class="btn btn-primary" id="btnAddCar">+ Add Car</button>
+      </div>
     </div>
   </header>
 
@@ -438,6 +580,83 @@
   </div>
 
   <script src="app.js"></script>
+  <script src="payment.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CART FLYOUT
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="cart-overlay hidden" id="cartOverlay" aria-hidden="true"></div>
+  <aside class="cart-flyout hidden" id="cartFlyout" aria-label="Shopping cart">
+    <div class="cart-flyout-header">
+      <h2>🛒 Your Cart</h2>
+      <button class="modal-close" id="cartClose" aria-label="Close cart">✕</button>
+    </div>
+    <ul class="cart-items" id="cartItems"></ul>
+    <div class="cart-empty hidden" id="cartEmpty">
+      <p>Your cart is empty.</p>
+      <a href="#shop" class="btn btn-primary btn-sm">Browse Shop</a>
+    </div>
+    <div class="cart-flyout-footer hidden" id="cartFooter">
+      <div class="cart-flyout-total">
+        Total: <strong id="cartTotal">$0.00</strong>
+      </div>
+      <button class="btn btn-primary" id="cartCheckoutBtn">Checkout →</button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CHECKOUT MODAL
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay hidden" id="checkoutModalOverlay">
+    <div class="modal modal-wide" id="checkoutModal">
+      <div class="modal-header">
+        <h2>💳 Secure Checkout</h2>
+        <button class="modal-close" id="checkoutClose" aria-label="Close checkout">✕</button>
+      </div>
+
+      <!-- Order summary -->
+      <div class="checkout-summary" id="paymentSummary"></div>
+
+      <!-- Payment form -->
+      <form id="checkoutForm" novalidate>
+
+        <!-- Shipping method selector — injected by payment.js -->
+        <div class="checkout-section-label">Shipping Method</div>
+        <div id="shippingSelector" class="shipping-selector"></div>
+
+        <div class="checkout-payment-label">
+          <span>Payment Method</span>
+          <span class="checkout-payment-icons" aria-label="Accepted payment methods">
+            💳 Visa · Mastercard · Amex · Discover · Cash App
+          </span>
+        </div>
+
+        <!-- Stripe Payment Element mounts here -->
+        <div id="paymentElementMount" class="payment-element-mount"></div>
+
+        <p class="checkout-error" id="checkoutError" role="alert"></p>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="checkoutCancelBtn">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary" id="checkoutSubmitBtn" disabled>
+            Pay Now
+          </button>
+        </div>
+      </form>
+
+      <!-- Success state -->
+      <div class="checkout-success hidden" id="checkoutSuccess">
+        <div class="checkout-success-icon">✅</div>
+        <h3>Payment Successful!</h3>
+        <p>Thank you for your order. You'll receive a confirmation soon.</p>
+        <button class="btn btn-primary" id="checkoutSuccessBack">
+          Back to Shop
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════════════════════════════════════════════════════════
        INSTAGRAM FEED WIDGET
