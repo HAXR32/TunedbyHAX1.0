@@ -22,7 +22,7 @@ The shop uses [Stripe](https://stripe.com) for secure payment processing.
 
 ### Supported Payment Methods
 - ✅ All major **credit and debit cards** (Visa, Mastercard, Amex, Discover, and more)
-- ✅ **Cash App Pay** (US customers)
+- ✅ **Cash App Pay** (US customers) — Cashtag: **$TunedByHAX**
 - ✅ Any other method enabled in your Stripe Dashboard
 
 ### Setup
@@ -41,6 +41,8 @@ The shop uses [Stripe](https://stripe.com) for secure payment processing.
      ```
 
 3. **Enable Cash App Pay** in your Stripe Dashboard under *Settings → Payment methods*
+   - Once enabled, the checkout will automatically surface the **Cash App Pay** button
+   - Your Cashtag **$TunedByHAX** is shown to customers in the checkout UI
 
 4. **Start the server**
    ```bash
