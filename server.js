@@ -88,16 +88,24 @@ const SHIPPING_RATES = {
 /** Maximum order total in cents ($10,000). Prevents runaway charges. */
 const MAX_ORDER_TOTAL_CENTS = 1_000_000;
 const PRODUCTS = {
-  'tbh-hoodie-blk':      { name: 'TunedbyHAX Hoodie (Black)',           price: 5500  },
-  'tbh-hoodie-grn':      { name: 'TunedbyHAX Hoodie (Green)',           price: 5500  },
-  'tbh-tee-wht':         { name: 'TunedbyHAX T-Shirt (White)',          price: 2800  },
-  'tbh-tee-blk':         { name: 'TunedbyHAX T-Shirt (Black)',          price: 2800  },
-  'tbh-cap':             { name: 'TunedbyHAX Snapback Cap',             price: 3200  },
-  'tbh-sticker-pack':    { name: 'TunedbyHAX Vinyl Sticker Pack (10x)', price: 1200  },
-  'jdm-diecast-rx7':     { name: '1:64 Mazda RX-7 FD Die-Cast Model',  price: 3500  },
-  'jdm-diecast-sti':     { name: '1:64 Subaru WRX STI Die-Cast Model', price: 3500  },
-  'jdm-keychain':        { name: 'JDM Turbo Keychain',                  price: 1500  },
-  'tbh-poster-jdm':      { name: 'JDM Garage Poster (A2)',             price: 2200  },
+  'tbh-hoodie-blk':           { name: 'TunedbyHAX Hoodie (Black)',           price: 5500  },
+  'tbh-hoodie-grn':           { name: 'TunedbyHAX Hoodie (Green)',           price: 5500  },
+  'tbh-tee-wht':              { name: 'TunedbyHAX T-Shirt (White)',          price: 2800  },
+  'tbh-tee-blk':              { name: 'TunedbyHAX T-Shirt (Black)',          price: 2800  },
+  'tbh-cap':                  { name: 'TunedbyHAX Snapback Cap',             price: 3200  },
+  'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (10x)', price: 1200  },
+  'jdm-diecast-rx7':          { name: '1:64 Mazda RX-7 FD Die-Cast Model',  price: 3500  },
+  'jdm-diecast-sti':          { name: '1:64 Subaru WRX STI Die-Cast Model', price: 3500  },
+  'jdm-keychain':             { name: 'JDM Turbo Keychain',                  price: 1500  },
+  // Car Logo Keychains — $6.50 each
+  'car-logo-keychain-toyota':     { name: 'Car Logo Keychain (Toyota)',     price: 650   },
+  'car-logo-keychain-honda':      { name: 'Car Logo Keychain (Honda)',      price: 650   },
+  'car-logo-keychain-subaru':     { name: 'Car Logo Keychain (Subaru)',     price: 650   },
+  'car-logo-keychain-nissan':     { name: 'Car Logo Keychain (Nissan)',     price: 650   },
+  'car-logo-keychain-mitsubishi': { name: 'Car Logo Keychain (Mitsubishi)', price: 650   },
+  // Custom Keychain — $8.50
+  'custom-keychain':          { name: 'Custom Keychain (Custom Design)',     price: 850   },
+  'tbh-poster-jdm':           { name: 'JDM Garage Poster (A2)',             price: 2200  },
 };
 
 // ── Helper: validate a cart from the request ──────────────────
