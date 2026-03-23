@@ -163,6 +163,29 @@
     }
     .hero-feedback textarea:focus { border-color: #13dc90; }
     .hero-feedback textarea::placeholder { color: #71717a; }
+    .hero-feedback input[type="email"] {
+      width: 100%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      color: #e4e4e7;
+      font-size: .95rem;
+      padding: .75rem 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .18s;
+    }
+    .hero-feedback input[type="email"]:focus { border-color: #13dc90; }
+    .hero-feedback input[type="email"]::placeholder { color: #71717a; }
+    .hero-feedback-contact {
+      font-size: .85rem;
+      color: #a1a1aa;
+    }
+    .hero-feedback-contact a {
+      color: #13dc90;
+      text-decoration: none;
+    }
+    .hero-feedback-contact a:hover { text-decoration: underline; }
     .hero-feedback button {
       background: rgba(119, 223, 206, 0.75);
       color: #0d0d0f;
@@ -242,9 +265,34 @@
 
     <!-- Feedback -->
     <div class="hero-feedback">
-      <textarea placeholder="HOW WAS YOUR SHOPPING EXPERIENCE? WHAT CAN WE DO BETTER?"></textarea>
-      <button type="button">SUBMIT FEEDBACK</button>
+      <input type="email" id="feedbackEmail" placeholder="YOUR EMAIL (OPTIONAL)">
+      <textarea id="feedbackText" placeholder="HOW WAS YOUR SHOPPING EXPERIENCE? WHAT CAN WE DO BETTER?"></textarea>
+      <button type="button" id="feedbackSubmit">SUBMIT FEEDBACK</button>
+      <p class="hero-feedback-contact">
+        OR EMAIL US DIRECTLY AT
+        <a href="mailto:wildlyfexlt@gmail.com">wildlyfexlt@gmail.com</a>
+      </p>
     </div>
+    <script>
+      document.getElementById('feedbackSubmit').addEventListener('click', function () {
+        var feedbackTextArea  = document.getElementById('feedbackText');
+        var feedbackEmailInput = document.getElementById('feedbackEmail');
+        var feedbackMessage = feedbackTextArea.value.trim();
+        var customerEmail   = feedbackEmailInput.value.trim();
+        if (!feedbackMessage) {
+          feedbackTextArea.style.borderColor = '#f87171';
+          feedbackTextArea.focus();
+          return;
+        }
+        feedbackTextArea.style.borderColor = '';
+        var subject = encodeURIComponent('TunedbyHAX Customer Feedback');
+        var body    = encodeURIComponent(
+          (customerEmail ? 'From: ' + customerEmail + '\n\n' : '') + feedbackMessage
+        );
+        window.location.href =
+          'mailto:wildlyfexlt@gmail.com?subject=' + subject + '&body=' + body;
+      });
+    </script>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
