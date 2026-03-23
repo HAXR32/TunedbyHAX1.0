@@ -521,7 +521,7 @@ async function initStripeElements() {
       appearance: {
         theme: 'night',
         variables: {
-          colorPrimary:       '#f97316',
+          colorPrimary:       '#00d64f',   // Cash App green as primary accent
           colorBackground:    '#18181b',
           colorText:          '#e4e4e7',
           colorDanger:        '#ef4444',
@@ -531,8 +531,14 @@ async function initStripeElements() {
       },
     });
 
+    // 'cashappPay: always' ensures the Cash App Pay button is always rendered
+    // at the top of the payment options when Cash App Pay is enabled in the
+    // Stripe Dashboard (Settings → Payment methods → Cash App Pay).
     paymentElement = elements.create('payment', {
       layout: 'tabs',
+      wallets: {
+        cashappPay: 'always',
+      },
     });
     paymentElement.mount('#paymentElementMount');
 

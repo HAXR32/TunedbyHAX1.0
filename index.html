@@ -253,6 +253,14 @@
   <div class="section-divider" id="shop">
     <h2>🛒 SHOP TUNEDBYHAX</h2>
     <p>JDM,EURO,USDM collectibles, HAX-approved merch, and exclusive accessories — all shipped worldwide.</p>
+    <div class="shop-payment-bar">
+      <span class="shop-payment-bar-label">Secure payments via</span>
+      <span class="shop-pay-chip">💳 Card</span>
+      <span class="shop-pay-chip shop-pay-chip-cashapp" aria-label="Cash App Pay accepted — $TunedByHAX">
+        <span class="shop-pay-chip-dollar" aria-hidden="true">$</span>
+        Cash App Pay &nbsp;·&nbsp; <strong>$TunedByHAX</strong>
+      </span>
+    </div>
   </div>
 
   <section class="shop-section">
@@ -626,9 +634,31 @@
 
         <div class="checkout-payment-label">
           <span>Payment Method</span>
-          <span class="checkout-payment-icons" aria-label="Accepted payment methods">
-            💳 Visa · Mastercard · Amex · Discover · Cash App
+          <span class="checkout-payment-icons" aria-label="Accepted payment methods: Visa, Mastercard, Amex, Discover, and Cash App Pay">
+            <span aria-hidden="true">💳</span> Visa · MC · Amex · Discover ·
+            <span class="cashapp-pay-badge" aria-label="Cash App Pay — cashtag dollar-sign TunedByHAX">
+              <span class="cashapp-pay-badge-icon" aria-hidden="true">$</span>
+              Cash App Pay · <strong>$TunedByHAX</strong>
+            </span>
           </span>
+        </div>
+
+        <!-- Cash App Pay callout -->
+        <div class="cashapp-callout" id="cashappCallout">
+          <div class="cashapp-callout-left">
+            <span class="cashapp-callout-icon" aria-hidden="true">$</span>
+            <div>
+              <div class="cashapp-callout-title">Pay instantly with Cash App</div>
+              <div class="cashapp-callout-sub">Tap the <strong>Cash App Pay</strong> tab below · Cashtag: <strong>$TunedByHAX</strong></div>
+            </div>
+          </div>
+          <a href="https://cash.app/$TunedByHAX"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="cashapp-callout-link"
+             aria-label="Open Cash App — $TunedByHAX">
+            Open App ↗
+          </a>
         </div>
 
         <!-- Stripe Payment Element mounts here -->
