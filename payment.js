@@ -35,6 +35,8 @@ const API_BASE_URL = '';
 // ── Product catalogue (mirrors server.js) ─────────────────────
 // Prices in cents — displayed only, never sent to server.
 // The server always calculates the authoritative total.
+// Products with a `sizes` array will display a size selector on the card.
+// Products with an `image` property will show that image in the card banner.
 const SHOP_PRODUCTS = [
   {
     id: 'tbh-hoodie-blk',
@@ -43,6 +45,8 @@ const SHOP_PRODUCTS = [
     price: 5500,
     category: 'Apparel',
     emoji: '🧥',
+    image: 'IMG_20260322_055604542.jpg',
+    sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Premium fleece hoodie — HAX logo embroidered on chest.',
   },
   {
@@ -52,6 +56,8 @@ const SHOP_PRODUCTS = [
     price: 5500,
     category: 'Apparel',
     emoji: '🧥',
+    image: 'IMG_20260322_055618348.jpg',
+    sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Premium fleece hoodie in signature HAX green.',
   },
   {
@@ -61,6 +67,8 @@ const SHOP_PRODUCTS = [
     price: 2800,
     category: 'Apparel',
     emoji: '👕',
+    image: 'IMG_20260322_055635754.jpg',
+    sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Soft cotton tee with TunedbyHAX logo print.',
   },
   {
@@ -70,6 +78,8 @@ const SHOP_PRODUCTS = [
     price: 2800,
     category: 'Apparel',
     emoji: '👕',
+    image: 'IMG_20260322_055644699.jpg',
+    sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Soft cotton tee — all-black edition.',
   },
   {
@@ -79,6 +89,8 @@ const SHOP_PRODUCTS = [
     price: 3200,
     category: 'Apparel',
     emoji: '🧢',
+    image: 'IMG_20260322_055548226.jpg',
+    sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Structured snapback with embroidered HAX branding.',
   },
   {
@@ -116,6 +128,68 @@ const SHOP_PRODUCTS = [
     category: 'Accessories',
     emoji: '🔑',
     description: 'Zinc alloy turbo replica keychain — the perfect finishing touch.',
+  },
+  // ── Car Logo Keychains — $6.50 each ──────────────────────────
+  {
+    id: 'car-logo-keychain-toyota',
+    name: 'Car Logo Keychain',
+    variant: 'Toyota',
+    price: 650,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'IMG_20260322_055524404.jpg',
+    description: 'Zinc alloy Toyota logo keychain — a bold accent for your keys.',
+  },
+  {
+    id: 'car-logo-keychain-honda',
+    name: 'Car Logo Keychain',
+    variant: 'Honda',
+    price: 650,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'IMG_20260322_055524404.jpg',
+    description: 'Zinc alloy Honda logo keychain — sleek and durable.',
+  },
+  {
+    id: 'car-logo-keychain-subaru',
+    name: 'Car Logo Keychain',
+    variant: 'Subaru',
+    price: 650,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'IMG_20260322_055537068.jpg',
+    description: 'Zinc alloy Subaru star logo keychain — rally-inspired style.',
+  },
+  {
+    id: 'car-logo-keychain-nissan',
+    name: 'Car Logo Keychain',
+    variant: 'Nissan',
+    price: 650,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'IMG_20260322_055537068.jpg',
+    description: 'Zinc alloy Nissan logo keychain — JDM roots on your keyring.',
+  },
+  {
+    id: 'car-logo-keychain-mitsubishi',
+    name: 'Car Logo Keychain',
+    variant: 'Mitsubishi',
+    price: 650,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'IMG_20260322_132332~2.jpg',
+    description: 'Zinc alloy Mitsubishi diamond logo keychain — iconic JDM flair.',
+  },
+  // ── Custom Keychain — $8.50 ───────────────────────────────────
+  {
+    id: 'custom-keychain',
+    name: 'Custom Keychain',
+    variant: 'Custom Design',
+    price: 850,
+    category: 'Accessories',
+    emoji: '✨',
+    image: 'IMG_20260322_132332~2.jpg',
+    description: 'Personalized custom keychain — your logo, your design, your style. Contact us with your artwork.',
   },
   {
     id: 'tbh-poster-jdm',
@@ -199,12 +273,27 @@ function renderShop() {
   SHOP_PRODUCTS.forEach(product => {
     const card = document.createElement('article');
     card.className = 'shop-card';
+
+    const bannerContent = product.image
+      ? `<img class="shop-card-img" src="${escShop(product.image)}" alt="${escShop(product.name + (product.variant ? ' ' + product.variant : ''))}" loading="lazy">`
+      : `<span class="shop-card-emoji">${product.emoji}</span>`;
+
+    const sizeSelector = product.sizes
+      ? `<div class="shop-card-size-wrap">
+           <label class="shop-card-size-label" for="size-${product.id}">Size:</label>
+           <select class="shop-card-size-select" id="size-${product.id}" data-product-id="${product.id}">
+             ${product.sizes.map(s => `<option value="${escShop(s)}">${escShop(s)}</option>`).join('')}
+           </select>
+         </div>`
+      : '';
+
     card.innerHTML = `
-      <div class="shop-card-banner">${product.emoji}</div>
+      <div class="shop-card-banner">${bannerContent}</div>
       <div class="shop-card-body">
         <div class="shop-card-category">${product.category}</div>
         <div class="shop-card-name">${escShop(product.name)}${product.variant ? ` <span class="shop-card-variant">${escShop(product.variant)}</span>` : ''}</div>
         <p class="shop-card-desc">${escShop(product.description)}</p>
+        ${sizeSelector}
         <div class="shop-card-footer">
           <span class="shop-card-price">${fmtPrice(product.price)}</span>
           <button class="btn btn-primary btn-sm btn-add-to-cart" data-product-id="${product.id}">
@@ -225,15 +314,22 @@ function renderShop() {
 }
 
 // ── Cart helpers ───────────────────────────────────────────────
+// Cart items: { product, qty, size, cartKey }
+// cartKey is `productId|size` for sized items, otherwise just `productId`
 function addToCart(productId) {
   const product = SHOP_PRODUCTS.find(p => p.id === productId);
   if (!product) return;
 
-  const existing = cart.find(item => item.product.id === productId);
+  // Read selected size if this product has a size selector
+  const sizeSelect = document.getElementById(`size-${productId}`);
+  const size = sizeSelect ? sizeSelect.value : null;
+  const cartKey = size ? `${productId}|${size}` : productId;
+
+  const existing = cart.find(item => item.cartKey === cartKey);
   if (existing) {
     existing.qty = Math.min(existing.qty + 1, 99);
   } else {
-    cart.push({ product, qty: 1 });
+    cart.push({ product, qty: 1, size, cartKey });
   }
 
   updateCartBadge();
@@ -241,14 +337,14 @@ function addToCart(productId) {
   showCartFlyout();
 }
 
-function removeFromCart(productId) {
-  cart = cart.filter(item => item.product.id !== productId);
+function removeFromCart(cartKey) {
+  cart = cart.filter(item => item.cartKey !== cartKey);
   updateCartBadge();
   renderCartItems();
 }
 
-function updateQty(productId, delta) {
-  const item = cart.find(i => i.product.id === productId);
+function updateQty(cartKey, delta) {
+  const item = cart.find(i => i.cartKey === cartKey);
   if (!item) return;
   item.qty = Math.max(1, Math.min(item.qty + delta, 99));
   updateCartBadge();
@@ -300,21 +396,21 @@ function renderCartItems() {
   empty  && empty.classList.add('hidden');
   footer && footer.classList.remove('hidden');
 
-  cart.forEach(({ product, qty }) => {
+  cart.forEach(({ product, qty, size, cartKey }) => {
     const li = document.createElement('li');
     li.className = 'cart-item';
     li.innerHTML = `
       <span class="cart-item-emoji">${product.emoji}</span>
       <div class="cart-item-info">
-        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}</div>
+        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}${size ? ` <span class="cart-item-size">${escShop(size)}</span>` : ''}</div>
         <div class="cart-item-price">${fmtPrice(product.price * qty)}</div>
       </div>
       <div class="cart-item-qty">
-        <button class="cart-qty-btn" data-id="${product.id}" data-delta="-1">−</button>
+        <button class="cart-qty-btn" data-key="${escShop(cartKey)}" data-delta="-1">−</button>
         <span>${qty}</span>
-        <button class="cart-qty-btn" data-id="${product.id}" data-delta="1">+</button>
+        <button class="cart-qty-btn" data-key="${escShop(cartKey)}" data-delta="1">+</button>
       </div>
-      <button class="cart-remove" data-id="${product.id}" title="Remove">✕</button>
+      <button class="cart-remove" data-key="${escShop(cartKey)}" title="Remove">✕</button>
     `;
     list.appendChild(li);
   });
@@ -362,9 +458,9 @@ function initCartEvents() {
       const qtyBtn    = e.target.closest('.cart-qty-btn');
       const removeBtn = e.target.closest('.cart-remove');
       if (qtyBtn) {
-        updateQty(qtyBtn.dataset.id, Number(qtyBtn.dataset.delta));
+        updateQty(qtyBtn.dataset.key, Number(qtyBtn.dataset.delta));
       } else if (removeBtn) {
-        removeFromCart(removeBtn.dataset.id);
+        removeFromCart(removeBtn.dataset.key);
       }
     });
   }
