@@ -27,18 +27,20 @@ const stripe = Stripe(stripeSecretKey, { apiVersion: '2023-10-16' });
 // ── App setup ─────────────────────────────────────────────────
 const app = express();
 
-// Serve static front-end files from the project root
-app.use(express.static(path.join(__dirname)));
-
-// Parse JSON request bodies (limit prevents abuse)
-app.use(express.json({ limit: '16kb' }));
-
-// CORS — restrict to same origin in production; allow all in development
+// CORS — must be registered first so preflight OPTIONS requests
+// receive the correct headers before any other middleware runs.
+// Restrict to same origin in production; allow all in development.
 const allowedOrigin = process.env.FRONTEND_ORIGIN || '*';
 app.use(cors({
   origin: allowedOrigin,
   methods: ['GET', 'POST'],
 }));
+
+// Serve static front-end files from the project root
+app.use(express.static(path.join(__dirname)));
+
+// Parse JSON request bodies (limit prevents abuse)
+app.use(express.json({ limit: '16kb' }));
 
 // ── Shipping rates ─────────────────────────────────────────────
 // Rates are in cents (USD).  Free standard shipping kicks in when

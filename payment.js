@@ -21,6 +21,17 @@ if (STRIPE_PUBLISHABLE_KEY.includes('REPLACE_WITH')) {
   );
 }
 
+// ── API base URL ───────────────────────────────────────────────
+// When the front-end is served from the same origin as the Node.js
+// backend (e.g. running `node server.js` locally), leave this as an
+// empty string so fetch uses a relative path.
+//
+// If the front-end is hosted on a static host (e.g. GitHub Pages) and
+// the backend is deployed separately, set this to the full origin of
+// the backend server, for example:
+//   const API_BASE_URL = 'https://api.tunedbyhax.com';
+const API_BASE_URL = '';
+
 // ── Product catalogue (mirrors server.js) ─────────────────────
 // Prices in cents — displayed only, never sent to server.
 // The server always calculates the authoritative total.
@@ -489,7 +500,7 @@ async function initStripeElements() {
 
   try {
     // Create a PaymentIntent on our server
-    const response = await fetch('/create-payment-intent', {
+    const response = await fetch(API_BASE_URL + '/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -498,6 +509,17 @@ async function initStripeElements() {
         currency:       'usd',
       }),
     });
+
+    // Guard against non-JSON responses (e.g. an HTML 404 page returned by a
+    // static host) which would otherwise throw a cryptic JSON.parse error.
+    // Use case-insensitive match since HTTP headers are case-insensitive.
+    const contentType = (response.headers.get('content-type') || '').toLowerCase();
+    if (!contentType.includes('application/json')) {
+      throw new Error(
+        `Payment server returned an unexpected response (HTTP ${response.status}). ` +
+        'Please ensure the backend server is running and API_BASE_URL is configured correctly.'
+      );
+    }
 
     const data = await response.json();
     if (!response.ok || data.error) {
