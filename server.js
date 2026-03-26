@@ -98,16 +98,16 @@ const PRODUCTS = {
   'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (10x)', price: 1200  },
   'jdm-diecast-rx7':          { name: '1:64 Mazda RX-7 FD Die-Cast Model',  price: 3500  },
   'jdm-diecast-sti':          { name: '1:64 Subaru WRX STI Die-Cast Model', price: 3500  },
-  // JDM Turbo Keychains — $15.00 each
-  'jdm-keychain-silver':      { name: 'JDM Turbo Keychain (Silver)',         price: 1500  },
-  'jdm-keychain-gold':        { name: 'JDM Turbo Keychain (Gold)',           price: 1500  },
-  'jdm-keychain-black':       { name: 'JDM Turbo Keychain (Black)',          price: 1500  },
-  // Car Logo Keychains — $6.50 each
-  'car-logo-keychain-toyota':     { name: 'Car Logo Keychain (Toyota)',     price: 650   },
-  'car-logo-keychain-honda':      { name: 'Car Logo Keychain (Honda)',      price: 650   },
-  'car-logo-keychain-subaru':     { name: 'Car Logo Keychain (Subaru)',     price: 650   },
-  'car-logo-keychain-nissan':     { name: 'Car Logo Keychain (Nissan)',     price: 650   },
-  'car-logo-keychain-mitsubishi': { name: 'Car Logo Keychain (Mitsubishi)', price: 650   },
+  // JDM Turbo Keychains — $5.50 each
+  'jdm-keychain-silver':      { name: 'JDM Turbo Keychain (Silver)',         price: 550   },
+  'jdm-keychain-gold':        { name: 'JDM Turbo Keychain (Gold)',           price: 550   },
+  'jdm-keychain-black':       { name: 'JDM Turbo Keychain (Black)',          price: 550   },
+  // Car Logo Keychains — $5.50 each
+  'car-logo-keychain-toyota':     { name: 'Car Logo Keychain (Toyota)',     price: 550   },
+  'car-logo-keychain-honda':      { name: 'Car Logo Keychain (Honda)',      price: 550   },
+  'car-logo-keychain-subaru':     { name: 'Car Logo Keychain (Subaru)',     price: 550   },
+  'car-logo-keychain-nissan':     { name: 'Car Logo Keychain (Nissan)',     price: 550   },
+  'car-logo-keychain-mitsubishi': { name: 'Car Logo Keychain (Mitsubishi)', price: 550   },
   // Custom Keychain — $8.50
   'custom-keychain':          { name: 'Custom Keychain (Custom Design)',     price: 850   },
   'tbh-poster-jdm':           { name: 'JDM Garage Poster (A2)',             price: 2200  },
