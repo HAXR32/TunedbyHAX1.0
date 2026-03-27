@@ -27,7 +27,11 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.62);
+      background:
+        radial-gradient(ellipse at 50% 0%,   rgba(19, 220, 144, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 65%,  rgba(112, 77, 147, 0.18) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 55%,  rgba(19, 180, 220, 0.14) 0%, transparent 40%),
+        linear-gradient(180deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.48) 100%);
     }
     .hero > * { position: relative; z-index: 1; }
 
