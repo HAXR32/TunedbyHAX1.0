@@ -164,7 +164,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260322_055524404.jpg',
+    image: 'IMG_20260322_055537068.jpg',
     description: 'Audi Car Logo Key Chain — zinc alloy four-rings logo keychain.',
   },
   {
@@ -194,7 +194,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260322_055604542.jpg',
+    image: 'IMG_20260322_055618348.jpg',
     description: 'Black Volkswagen Car Logo Key Chain — zinc alloy VW logo keychain in black finish.',
   },
   {
