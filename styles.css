@@ -1192,23 +1192,67 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ---------- Responsive ---------- */
+
+/* Tablet — up to 1024 px */
+@media (max-width: 1024px) {
+  .garage-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .shop-grid   { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+
+/* Phablet / small tablet — up to 768 px */
 @media (max-width: 768px) {
+  .header-inner { padding: .65rem 1rem; }
+  .logo-tag { display: none; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat-value { font-size: 1.4rem; }
   .form-row   { grid-template-columns: 1fr; }
   .mods-add-form { flex-direction: column; }
   .mods-add-form input,
   .mods-add-form select { min-width: unset; width: 100%; }
   .shop-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-  .cart-flyout { width: 100vw; }
+  .cart-flyout { width: 100vw; border-left: none; }
   .checkout-payment-label { flex-direction: column; align-items: flex-start; gap: .25rem; }
   .shipping-rates-grid { grid-template-columns: repeat(2, 1fr); }
   .shipping-policy-grid { grid-template-columns: 1fr; }
+  .modal-overlay { padding: .5rem; }
+  /* Ensure adequate touch targets */
+  .btn { min-height: 2.75rem; }
 }
+
+/* Small phone — up to 480 px */
 @media (max-width: 480px) {
+  .logo-text { font-size: 1rem; }
+  .header-actions { gap: .4rem; }
   .stats-bar { grid-template-columns: 1fr 1fr; }
   .garage-grid { grid-template-columns: 1fr; }
   .toolbar { flex-direction: column; align-items: stretch; }
   .sort-wrap { justify-content: space-between; }
   .shop-grid { grid-template-columns: 1fr; }
   .shipping-rates-grid { grid-template-columns: 1fr; }
+  .modal { max-height: 95vh; }
+  /* Give modal forms a little more breathing room */
+  #carForm,
+  #checkoutForm { padding: 1rem; }
+}
+
+/* Touch / coarse-pointer devices — suppress hover transforms for smoother scrolling */
+@media (hover: none) and (pointer: coarse) {
+  .car-card:hover,
+  .shop-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+  }
+  .ship-rate-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    transition-duration: 0ms !important;
+  }
 }
