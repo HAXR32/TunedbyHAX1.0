@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="400" height="280">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stripeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e63946;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c1121f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cccccc;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="280" rx="16" ry="16" fill="url(#bgGrad)"/>
+
+  <!-- Red racing stripe - top -->
+  <rect x="0" y="0" width="400" height="8" rx="0" ry="0" fill="url(#stripeGrad)"/>
+  <rect x="0" y="272" width="400" height="8" rx="0" ry="0" fill="url(#stripeGrad)"/>
+
+  <!-- Side accent lines -->
+  <rect x="0" y="8" width="6" height="264" fill="#e63946" opacity="0.7"/>
+  <rect x="394" y="8" width="6" height="264" fill="#e63946" opacity="0.7"/>
+
+  <!-- Japanese flag circle (Hinomaru) -->
+  <circle cx="72" cy="140" r="42" fill="#e63946" opacity="0.15"/>
+  <circle cx="72" cy="140" r="34" fill="none" stroke="#e63946" stroke-width="2" opacity="0.5"/>
+  <circle cx="72" cy="140" r="24" fill="#e63946" opacity="0.9"/>
+
+  <!-- JDM text -->
+  <text x="200" y="118" font-family="Arial Black, Impact, sans-serif" font-size="72" font-weight="900"
+        fill="url(#textGrad)" text-anchor="middle" letter-spacing="6" filter="url(#shadow)">JDM</text>
+
+  <!-- Subtitle text -->
+  <text x="200" y="152" font-family="Arial, sans-serif" font-size="16" font-weight="600"
+        fill="#e63946" text-anchor="middle" letter-spacing="8">VINYL  DECAL</text>
+
+  <!-- Bottom tag line -->
+  <text x="200" y="200" font-family="Arial, sans-serif" font-size="13" font-weight="400"
+        fill="#888888" text-anchor="middle" letter-spacing="3">JAPANESE  DOMESTIC  MARKET</text>
+
+  <!-- Racing stripe decorations -->
+  <line x1="110" y1="168" x2="290" y2="168" stroke="#e63946" stroke-width="1.5" opacity="0.4"/>
+  <line x1="110" y1="172" x2="290" y2="172" stroke="#e63946" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Corner accent marks -->
+  <path d="M 26 26 L 50 26 L 50 28 L 28 28 L 28 50 L 26 50 Z" fill="#e63946" opacity="0.6"/>
+  <path d="M 374 26 L 350 26 L 350 28 L 372 28 L 372 50 L 374 50 Z" fill="#e63946" opacity="0.6"/>
+  <path d="M 26 254 L 50 254 L 50 252 L 28 252 L 28 230 L 26 230 Z" fill="#e63946" opacity="0.6"/>
+  <path d="M 374 254 L 350 254 L 350 252 L 372 252 L 372 230 L 374 230 Z" fill="#e63946" opacity="0.6"/>
+</svg>
