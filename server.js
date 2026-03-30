@@ -111,6 +111,8 @@ const PRODUCTS = {
   // Custom Keychain — $8.50
   'custom-keychain':          { name: 'Custom Keychain (Custom Design)',     price: 850   },
   'tbh-poster-jdm':           { name: 'JDM Garage Poster (A2)',             price: 2200  },
+  // Custom License Plates — $100.00
+  'custom-license-plate':     { name: 'Custom License Plates (License Plate Cover and/or Cosmetic for all vehicles)', price: 10000 },
 };
 
 // ── Helper: validate a cart from the request ──────────────────
