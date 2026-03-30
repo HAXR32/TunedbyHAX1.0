@@ -331,6 +331,19 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
+       SITE NAVIGATION TABS
+  ═══════════════════════════════════════════════════════════ -->
+  <nav class="site-tabs" id="siteTabs" aria-label="Site navigation">
+    <div class="tabs-inner">
+      <a href="#shop"     class="tab-link">🛒 Shop</a>
+      <a href="#gallery"  class="tab-link">🖼️ Gallery</a>
+      <a href="#garage"   class="tab-link">🚗 Virtual Garage</a>
+      <a href="#contact"  class="tab-link">📬 Contact Us</a>
+      <a href="#shipping" class="tab-link">📦 Shipping</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
        SHOP SECTION
   ═══════════════════════════════════════════════════════════ -->
   <div class="section-divider" id="shop">
@@ -353,7 +366,46 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
-       SHIPPING & HANDLING SECTION
+       GALLERY SECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="section-divider" id="gallery">
+    <h2>🖼️ GALLERY</h2>
+    <p>A showcase of builds, meets, and HAX-approved rides — images and videos coming soon.</p>
+  </div>
+
+  <section class="gallery-section">
+    <div class="gallery-coming-soon-banner">
+      <span class="coming-soon-icon">📸</span>
+      <h3>Gallery Coming Soon</h3>
+      <p>
+        We're uploading photos and videos of the latest builds, events, and exclusive content.
+        Follow
+        <a href="https://www.instagram.com/m0rtalHAX" target="_blank" rel="noopener noreferrer">@M0rtalHAX</a>
+        on Instagram to stay up to date.
+      </p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-placeholder-card">
+        <span class="gallery-placeholder-icon">🏎️</span>
+        <span class="gallery-placeholder-label">Build Photos</span>
+      </div>
+      <div class="gallery-placeholder-card">
+        <span class="gallery-placeholder-icon">🎬</span>
+        <span class="gallery-placeholder-label">Build Videos</span>
+      </div>
+      <div class="gallery-placeholder-card">
+        <span class="gallery-placeholder-icon">🔧</span>
+        <span class="gallery-placeholder-label">Mod Walkthroughs</span>
+      </div>
+      <div class="gallery-placeholder-card">
+        <span class="gallery-placeholder-icon">🚗</span>
+        <span class="gallery-placeholder-label">Car Meets</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SHIPPING &amp; HANDLING SECTION
   ═══════════════════════════════════════════════════════════ -->
   <div class="section-divider" id="shipping">
     <h2>📦 SHIPPING &amp; HANDLING</h2>
@@ -772,6 +824,33 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════
+       CONTACT US SECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="section-divider" id="contact">
+    <h2>📬 CONTACT US</h2>
+    <p>Questions, collabs, or just want to talk cars? We'd love to hear from you.</p>
+  </div>
+
+  <section class="contact-section">
+    <div class="contact-card">
+      <span class="contact-card-icon">✉️</span>
+      <span class="contact-card-label">Email Us</span>
+      <p class="contact-card-value">
+        Reach us directly at<br>
+        <a href="mailto:wildlyfexlt@gmail.com">wildlyfexlt@gmail.com</a>
+      </p>
+    </div>
+    <div class="contact-card">
+      <span class="contact-card-icon">📸</span>
+      <span class="contact-card-label">Instagram</span>
+      <p class="contact-card-value">
+        Follow &amp; DM us on Instagram for the latest updates, builds, and exclusive offers.<br>
+        <a href="https://www.instagram.com/m0rtalHAX" target="_blank" rel="noopener noreferrer">@M0rtalHAX</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
        INSTAGRAM FEED WIDGET
   ═══════════════════════════════════════════════════════════ -->
   <section style="padding:2rem 1.5rem 3rem;background:var(--bg);text-align:center;">
@@ -790,6 +869,46 @@
             title="TunedbyHAX Instagram Feed"
             style="width:100%;border:0;overflow:hidden;"></iframe>
   </section>
+
+  <script>
+    /* ── Active tab highlight on scroll ───────────────────────── */
+    (function () {
+      var sections = ['shop', 'gallery', 'garage', 'contact', 'shipping'];
+      var tabLinks = document.querySelectorAll('.tab-link');
+      var ticking = false;
+
+      /* Cache section offsets and refresh on resize */
+      var offsets = {};
+      function cacheOffsets() {
+        sections.forEach(function (id) {
+          var el = document.getElementById(id);
+          offsets[id] = el ? el.offsetTop : 0;
+        });
+      }
+      cacheOffsets();
+      window.addEventListener('resize', cacheOffsets, { passive: true });
+
+      function setActive() {
+        var scrollY = window.scrollY + 100;
+        var active = '';
+        sections.forEach(function (id) {
+          if (offsets[id] <= scrollY) active = id;
+        });
+        tabLinks.forEach(function (a) {
+          var href = a.getAttribute('href');
+          a.classList.toggle('active', href === '#' + active);
+        });
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(setActive);
+          ticking = true;
+        }
+      }, { passive: true });
+      setActive();
+    })();
+  </script>
 
 </body>
 </html>
