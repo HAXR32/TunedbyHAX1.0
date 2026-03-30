@@ -95,9 +95,8 @@ const PRODUCTS = {
   'tbh-tee-wht':              { name: 'TunedbyHAX T-Shirt (White)',          price: 2800  },
   'tbh-tee-blk':              { name: 'TunedbyHAX T-Shirt (Black)',          price: 2800  },
   'tbh-cap':                  { name: 'TunedbyHAX Snapback Cap',             price: 3200  },
-  'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (10x)', price: 1200  },
-  'jdm-diecast-rx7':          { name: '1:64 Mazda RX-7 FD Die-Cast Model',  price: 3500  },
-  'jdm-diecast-sti':          { name: '1:64 Subaru WRX STI Die-Cast Model', price: 3500  },
+  'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (5x)',  price: 500   },
+  'jdm-diecast-sti':          { name: 'WRX STI Lego-Style Model Car',        price: 7500  },
   // JDM Turbo Keychains — $5.50 each
   'jdm-keychain-silver':      { name: 'JDM Turbo Keychain (Silver)',         price: 550   },
   'jdm-keychain-gold':        { name: 'JDM Turbo Keychain (Gold)',           price: 550   },
