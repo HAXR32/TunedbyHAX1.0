@@ -110,6 +110,7 @@ const SHOP_PRODUCTS = [
     price: 7500,
     category: 'Collectibles',
     emoji: '🚗',
+    image: 'IMG_20260330_062247725~3.jpg',
     description: 'collectible cosplay car for Subaru enthusiasts',
   },
   // ── JDM Turbo Keychains — $5.50 each ────────────────────────
