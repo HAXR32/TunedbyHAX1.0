@@ -1410,66 +1410,25 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.25rem;
 }
-.gallery-placeholder-card {
-  background: var(--surface);
-  border: 1px dashed rgba(220, 26, 46, 0.35);
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .6rem;
-  min-height: 200px;
-  color: var(--text-muted);
-  font-size: .85rem;
-  text-align: center;
-  padding: 1.5rem;
-  transition: border-color var(--transition), background var(--transition);
-}
-.gallery-placeholder-card:hover {
-  border-color: var(--jdm-gold);
-  background: var(--surface2);
-}
-.gallery-placeholder-icon { font-size: 2.5rem; }
-.gallery-placeholder-label {
-  font-family: var(--font-display);
-  font-size: .9rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.gallery-coming-soon-banner {
-  text-align: center;
-  padding: 3rem 1.5rem;
+.gallery-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  aspect-ratio: 4 / 3;
 }
-.gallery-coming-soon-banner .coming-soon-icon { font-size: 3.5rem; display: block; margin-bottom: .75rem; }
-.gallery-coming-soon-banner h3 {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--jdm-gold) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: .5rem;
+.gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-.gallery-coming-soon-banner p {
-  color: var(--text-muted);
-  font-size: .95rem;
-  max-width: 500px;
-  margin: 0 auto;
+.gallery-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--jdm-gold);
+  box-shadow: var(--shadow-glow);
 }
-.gallery-coming-soon-banner a {
-  color: var(--jdm-gold);
-  text-decoration: none;
-  font-weight: 700;
-}
-.gallery-coming-soon-banner a:hover { text-decoration: underline; }
 
 /* ============================================================
    CONTACT SECTION
