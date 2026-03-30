@@ -238,6 +238,16 @@ const SHOP_PRODUCTS = [
     description: 'High-quality print of HAX\'s personal JDM garage shoot.',
     comingSoon: true,
   },
+  // ── Custom License Plates — $100.00 ──────────────────────────
+  {
+    id: 'custom-license-plate',
+    name: 'Custom License Plates',
+    variant: 'License Plate Cover and/or Cosmetic for all vehicles',
+    price: 10000,
+    category: 'Accessories',
+    emoji: '🚘',
+    description: 'Personalize your ride with a custom HAX license plate — available as a cover and/or cosmetic upgrade for any vehicle make and model.',
+  },
 ];
 
 // ── Shipping rates (mirrors server.js SHIPPING_RATES) ─────────
