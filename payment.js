@@ -47,6 +47,7 @@ const SHOP_PRODUCTS = [
     emoji: '🧥',
     sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Premium fleece hoodie — HAX logo embroidered on chest.',
+    comingSoon: true,
   },
   {
     id: 'tbh-hoodie-grn',
@@ -57,6 +58,7 @@ const SHOP_PRODUCTS = [
     emoji: '🧥',
     sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Premium fleece hoodie in signature HAX green.',
+    comingSoon: true,
   },
   {
     id: 'tbh-tee-wht',
@@ -67,6 +69,7 @@ const SHOP_PRODUCTS = [
     emoji: '👕',
     sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Soft cotton tee with TunedbyHAX logo print.',
+    comingSoon: true,
   },
   {
     id: 'tbh-tee-blk',
@@ -77,6 +80,7 @@ const SHOP_PRODUCTS = [
     emoji: '👕',
     sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Soft cotton tee — all-black edition.',
+    comingSoon: true,
   },
   {
     id: 'tbh-cap',
@@ -87,6 +91,7 @@ const SHOP_PRODUCTS = [
     emoji: '🧢',
     sizes: ['Small', 'Medium', 'Large', 'Custom'],
     description: 'Structured snapback with embroidered HAX branding.',
+    comingSoon: true,
   },
   {
     id: 'tbh-sticker-pack',
@@ -125,6 +130,7 @@ const SHOP_PRODUCTS = [
     emoji: '🔑',
     image: '8186218.jpg',
     description: 'Zinc alloy turbo replica keychain in silver finish — the perfect JDM finishing touch.',
+    comingSoon: true,
   },
   {
     id: 'jdm-keychain-gold',
@@ -135,6 +141,7 @@ const SHOP_PRODUCTS = [
     emoji: '🔑',
     image: 'unnamed.jpg',
     description: 'Zinc alloy turbo replica keychain in gold finish — a golden accent for any JDM build.',
+    comingSoon: true,
   },
   {
     id: 'jdm-keychain-black',
@@ -145,6 +152,7 @@ const SHOP_PRODUCTS = [
     emoji: '🔑',
     image: 'IMG_20260322_132332~2.jpg',
     description: 'Zinc alloy turbo replica keychain in black chrome — sleek and stealthy.',
+    comingSoon: true,
   },
   // ── Car Logo Keychains — $5.50 each ──────────────────────────
   {
@@ -236,6 +244,7 @@ const SHOP_PRODUCTS = [
     category: 'Collectibles',
     emoji: '🖼️',
     description: 'High-quality print of HAX\'s personal JDM garage shoot.',
+    comingSoon: true,
   },
 ];
 
@@ -311,11 +320,13 @@ function renderShop() {
     const card = document.createElement('article');
     card.className = 'shop-card';
 
-    const bannerContent = product.image
-      ? `<img class="shop-card-img" src="${escShop(product.image)}" alt="${escShop(product.name + (product.variant ? ' ' + product.variant : ''))}" loading="lazy">`
-      : `<span class="shop-card-emoji">${product.emoji}</span>`;
+    const bannerContent = product.comingSoon
+      ? `<img class="shop-card-img" src="coming-soon.svg" alt="Coming Soon">`
+      : product.image
+        ? `<img class="shop-card-img" src="${escShop(product.image)}" alt="${escShop(product.name + (product.variant ? ' ' + product.variant : ''))}" loading="lazy">`
+        : `<span class="shop-card-emoji">${product.emoji}</span>`;
 
-    const sizeSelector = product.sizes
+    const sizeSelector = (!product.comingSoon && product.sizes)
       ? `<div class="shop-card-size-wrap">
            <label class="shop-card-size-label" for="size-${product.id}">Size:</label>
            <select class="shop-card-size-select" id="size-${product.id}" data-product-id="${product.id}">
@@ -324,6 +335,20 @@ function renderShop() {
          </div>`
       : '';
 
+    const cardFooter = product.comingSoon
+      ? `<div class="shop-card-footer">
+          <span class="shop-card-coming-soon-label">Coming Soon</span>
+          <button class="btn btn-sm shop-card-coming-soon-btn" disabled>
+            Unavailable
+          </button>
+        </div>`
+      : `<div class="shop-card-footer">
+          <span class="shop-card-price">${fmtPrice(product.price)}</span>
+          <button class="btn btn-primary btn-sm btn-add-to-cart" data-product-id="${product.id}">
+            Add to Cart
+          </button>
+        </div>`;
+
     card.innerHTML = `
       <div class="shop-card-banner">${bannerContent}</div>
       <div class="shop-card-body">
@@ -331,12 +356,7 @@ function renderShop() {
         <div class="shop-card-name">${escShop(product.name)}${product.variant ? ` <span class="shop-card-variant">${escShop(product.variant)}</span>` : ''}</div>
         <p class="shop-card-desc">${escShop(product.description)}</p>
         ${sizeSelector}
-        <div class="shop-card-footer">
-          <span class="shop-card-price">${fmtPrice(product.price)}</span>
-          <button class="btn btn-primary btn-sm btn-add-to-cart" data-product-id="${product.id}">
-            Add to Cart
-          </button>
-        </div>
+        ${cardFooter}
       </div>
     `;
     grid.appendChild(card);
