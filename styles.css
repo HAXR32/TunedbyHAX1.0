@@ -4,30 +4,36 @@
 
 /* ---------- CSS Variables ---------- */
 :root {
-  --bg:          #0d0d0f;
-  --surface:     #18181b;
-  --surface2:    #1f1f23;
-  --border:      #2e2e35;
-  --accent:      #f97316;      /* orange — wrench / fire */
-  --accent-dim:  #7c3415;
-  --accent2:     #3b82f6;      /* blue — tech */
-  --text:        #e4e4e7;
-  --text-muted:  #71717a;
+  --bg:          #08080f;      /* midnight black — JDM garage floor */
+  --surface:     #101018;      /* dark panel */
+  --surface2:    #17171f;      /* raised surface */
+  --border:      #2e1a22;      /* red-tinted border — JDM race livery */
+  --border-glow: rgba(220, 26, 46, 0.45);  /* red border glow */
+  --accent:      #dc1a2e;      /* JDM racing red — Japanese flag / Mugen / TRD */
+  --accent-dim:  #5a0a14;      /* deep red shadow */
+  --accent2:     #c8910a;      /* championship gold — rally/motorsport */
+  --jdm-gold:    #d4a520;      /* prestige gold highlight */
+  --jdm-orange:  #f97316;      /* rising sun orange — kept for warmth */
+  --text:        #f0f0f4;      /* crisp white */
+  --text-muted:  #7a7a9a;      /* cool muted */
   --danger:      #ef4444;
   --success:     #22c55e;
   --cashapp:     #00d64f;      /* Cash App brand green */
   --cashapp-hover: #00f05a;   /* Cash App hover green */
   --radius:      12px;
   --radius-sm:   8px;
-  --shadow:      0 4px 24px rgba(0,0,0,.55);
+  --shadow:      0 4px 24px rgba(0,0,0,.65);
+  --shadow-glow: 0 4px 24px rgba(220, 26, 46, 0.25);  /* red glow shadow */
   --transition:  .18s ease;
+  --font-display: 'Bebas Neue', 'Impact', 'Arial Black', fantasy, serif;
+  --font-ui:      'Rajdhani', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-ui);
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -40,11 +46,12 @@ body {
 /* ---------- Header ---------- */
 .site-header {
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--accent);
   position: sticky;
   top: 0;
   z-index: 100;
   backdrop-filter: blur(12px);
+  box-shadow: 0 2px 16px rgba(220, 26, 46, 0.18);
 }
 .header-inner {
   max-width: 1280px;
@@ -62,19 +69,25 @@ body {
 .logo-icon { font-size: 1.6rem; }
 .logo-text {
   font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -.5px;
-  color: var(--accent);
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-family: var(--font-display);
+  background: linear-gradient(90deg, #dc1a2e 0%, #d4a520 60%, #f0c040 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
 }
 .logo-tag {
   font-size: .7rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--text-muted);
+  color: var(--accent);
   padding: .2rem .5rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent);
   border-radius: 99px;
+  opacity: 0.8;
 }
 
 /* ---------- Buttons ---------- */
@@ -130,17 +143,27 @@ body {
   flex-direction: column;
   align-items: center;
   gap: .25rem;
+  border-top: 3px solid var(--accent);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.stat-card:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
 }
 .stat-value {
   font-size: 1.75rem;
   font-weight: 800;
-  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--jdm-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .stat-label {
   font-size: .75rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   color: var(--text-muted);
+  font-weight: 700;
 }
 
 /* ---------- Toolbar ---------- */
@@ -220,7 +243,7 @@ body {
 .car-card:hover {
   border-color: var(--accent);
   transform: translateY(-3px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-glow);
 }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
@@ -241,8 +264,8 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--accent-dim) 0%, #0d0d0f 100%);
-  opacity: .55;
+  background: linear-gradient(135deg, var(--accent-dim) 0%, #08080f 100%);
+  opacity: .65;
 }
 .card-banner-emoji { position: relative; z-index: 1; }
 
@@ -253,9 +276,10 @@ body {
   font-size: 1.15rem;
   font-weight: 800;
   color: var(--text);
-  letter-spacing: -.2px;
+  letter-spacing: .3px;
+  text-transform: uppercase;
 }
-.card-subtitle { font-size: .8rem; color: var(--text-muted); }
+.card-subtitle { font-size: .8rem; color: var(--text-muted); letter-spacing: .5px; }
 
 .card-meta {
   display: flex;
@@ -268,15 +292,17 @@ body {
   align-items: center;
   gap: .3rem;
   font-size: .75rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: .2rem .6rem;
   border-radius: 99px;
   background: var(--surface2);
   border: 1px solid var(--border);
   color: var(--text-muted);
+  letter-spacing: .5px;
+  text-transform: uppercase;
 }
 .card-badge.accent { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
-.card-badge.blue   { background: #1e3a5f; border-color: var(--accent2); color: var(--accent2); }
+.card-badge.blue   { background: rgba(200, 145, 10, 0.15); border-color: var(--jdm-gold); color: var(--jdm-gold); }
 
 .card-notes {
   font-size: .82rem;
@@ -612,7 +638,7 @@ body {
 .shop-card:hover {
   border-color: var(--accent);
   transform: translateY(-3px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-glow);
 }
 .shop-card-banner {
   height: 160px;
@@ -1030,10 +1056,11 @@ body {
 .ship-rate-card:hover {
   border-color: var(--accent);
   transform: translateY(-3px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-glow);
 }
 .ship-rate-card-popular {
   border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
 }
 .ship-rate-badge {
   position: absolute;
@@ -1059,7 +1086,7 @@ body {
 .ship-rate-carrier { font-size: .8rem; color: var(--text-muted); }
 .ship-rate-eta {
   font-size: .78rem;
-  color: var(--accent2);
+  color: var(--jdm-gold);
   font-weight: 600;
 }
 .ship-rate-price {
@@ -1086,16 +1113,7 @@ body {
   gap: 1.25rem;
   margin-bottom: 2rem;
 }
-.ship-policy-card {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  animation: fadeUp .3s ease both;
-}
+/* .ship-policy-card defined in Section Divider block above */
 .ship-policy-icon { font-size: 2rem; }
 .ship-policy-card h3 {
   font-size: .95rem;
@@ -1178,18 +1196,71 @@ body {
   margin-bottom: .15rem;
 }
 .ship-opt-carrier { font-size: .75rem; color: var(--text-muted); }
-.ship-opt-eta     { font-size: .75rem; color: var(--accent2); font-weight: 600; }
+.ship-opt-eta     { font-size: .75rem; color: var(--jdm-gold); font-weight: 600; }
 .ship-opt-desc    { font-size: .75rem; color: var(--text-muted); margin-top: .1rem; }
 
 /* Checkout summary shipping row */
 .checkout-summary-shipping { color: var(--text-muted); }
 .checkout-summary-free { color: var(--success); font-weight: 700; }
 
+/* ---------- Section Divider — JDM Gradient Headers ---------- */
+.section-divider {
+  text-align: center;
+  padding: 3rem 1.5rem 1rem;
+  background: var(--bg);
+  position: relative;
+}
+.section-divider::before {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--jdm-gold));
+  border-radius: 99px;
+  margin: 0 auto 1.25rem;
+}
+.section-divider h2 {
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-family: var(--font-display);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--jdm-gold) 60%, var(--text) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-divider p {
+  color: var(--text-muted);
+  font-size: .95rem;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Policy cards — left accent bar */
+.ship-policy-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  animation: fadeUp .3s ease both;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.ship-policy-card:hover {
+  border-left-color: var(--jdm-gold);
+  box-shadow: -3px 0 12px rgba(212, 165, 32, 0.2);
+}
+
 /* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--surface); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ---------- Responsive ---------- */
 
