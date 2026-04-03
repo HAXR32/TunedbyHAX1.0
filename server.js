@@ -106,9 +106,12 @@ const PRODUCTS = {
   // Car Logo Keychains — $5.50 each
   'car-logo-keychain-toyota':     { name: 'Car Logo Keychain (Toyota)',     price: 550   },
   'car-logo-keychain-honda':      { name: 'Car Logo Keychain (Honda)',      price: 550   },
-  'car-logo-keychain-subaru':     { name: 'Car Logo Keychain (Subaru)',     price: 550   },
+  'car-logo-keychain-subaru':     { name: 'Car Logo Key Chain (Subaru)',    price: 550   },
   'car-logo-keychain-nissan':     { name: 'Car Logo Keychain (Nissan)',     price: 550   },
   'car-logo-keychain-mitsubishi': { name: 'Car Logo Keychain (Mitsubishi)', price: 550   },
+  'car-logo-keychain-ford':       { name: 'Car Logo Key Chain (Ford)',      price: 550   },
+  'car-logo-keychain-porsche':    { name: 'Car Logo Key Chain (Porsche)',   price: 550   },
+  'car-logo-keychain-volvo':      { name: 'Car Logo Key Chain (Volvo)',     price: 550   },
   // Custom Keychain — $8.50
   'custom-keychain':          { name: 'Custom Keychain (Custom Design)',     price: 850   },
   'tbh-poster-jdm':           { name: 'JDM Garage Poster (A2)',             price: 2200  },
