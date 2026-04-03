@@ -314,6 +314,47 @@ const SHOP_PRODUCTS = [
     image: 'dbz-keychain-3.jpg',
     description: 'Rare collectible, message for inquiry.',
   },
+  // ── Custom Car Key Chains — $10.00 each ──────────────────────
+  {
+    id: 'custom-car-keychain-1',
+    name: 'Custom Car Key Chain',
+    variant: 'Chevrolet Camaro',
+    price: 1000,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'custom-car-keychain-1.jpg',
+    description: 'Chevrolet Camaro custom car key chain.',
+  },
+  {
+    id: 'custom-car-keychain-2',
+    name: 'Custom Car Key Chain',
+    variant: 'Dodge Challenger',
+    price: 1000,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'custom-car-keychain-2.jpg',
+    description: 'Dodge Challenger custom car key chain.',
+  },
+  {
+    id: 'custom-car-keychain-3',
+    name: 'Custom Car Key Chain',
+    variant: 'Nissan 350Z',
+    price: 1000,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'custom-car-keychain-3.jpg',
+    description: 'Nissan 350Z custom car key chain.',
+  },
+  {
+    id: 'custom-car-keychain-4',
+    name: 'Custom Car Key Chain',
+    variant: 'Subaru WRX',
+    price: 1000,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'custom-car-keychain-4.jpg',
+    description: 'Subaru WRX custom car key chain.',
+  },
 ];
 
 // ── Shipping rates (mirrors server.js SHIPPING_RATES) ─────────
