@@ -94,6 +94,8 @@ const PRODUCTS = {
   'tbh-hoodie-grn':           { name: 'TunedbyHAX Hoodie (Green)',           price: 5500  },
   'tbh-tee-wht':              { name: 'TunedbyHAX T-Shirt (White)',          price: 2800  },
   'tbh-tee-blk':              { name: 'TunedbyHAX T-Shirt (Black)',          price: 2800  },
+  'car-enthusiast-tee-wht':   { name: 'Car Enthusiast T-Shirt (White)',      price: 3000  },
+  'car-enthusiast-tee-blk':   { name: 'Car Enthusiast T-Shirt (Black)',      price: 3000  },
   'tbh-cap':                  { name: 'TunedbyHAX Snapback Cap',             price: 3200  },
   'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (5x)',  price: 500   },
   'jdm-diecast-sti':          { name: 'WRX STI Lego-Style Model Car',        price: 7500  },
