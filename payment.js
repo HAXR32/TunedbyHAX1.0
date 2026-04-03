@@ -289,7 +289,7 @@ const SHOP_PRODUCTS = [
     price: 850,
     category: 'Accessories',
     emoji: '✨',
-    image: 'IMG_20260403__055701.jpg',
+    image: 'IMG_20260403_055701.jpg',
     description: 'Custom Made Car Logo Key Chains — submit your design via e-mail and we will create a personalized keychain just for you.',
   },
   {
