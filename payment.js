@@ -218,6 +218,46 @@ const SHOP_PRODUCTS = [
     image: 'IMG_20260322_055644699.jpg',
     description: 'Toyota Car Logo Key Chain — zinc alloy Toyota logo keychain, a bold accent for your keys.',
   },
+  {
+    id: 'car-logo-keychain-subaru',
+    name: 'Car Logo Key Chain',
+    variant: 'Subaru',
+    price: 550,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: null, // image to be added
+    description: 'Subaru Car Logo Key Chain — zinc alloy Subaru logo keychain.',
+  },
+  {
+    id: 'car-logo-keychain-ford',
+    name: 'Car Logo Key Chain',
+    variant: 'Ford',
+    price: 550,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: null, // image to be added
+    description: 'Ford Car Logo Key Chain — zinc alloy Ford logo keychain.',
+  },
+  {
+    id: 'car-logo-keychain-porsche',
+    name: 'Car Logo Key Chain',
+    variant: 'Porsche',
+    price: 550,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: null, // image to be added
+    description: 'Porsche Car Logo Key Chain — zinc alloy Porsche logo keychain.',
+  },
+  {
+    id: 'car-logo-keychain-volvo',
+    name: 'Car Logo Key Chain',
+    variant: 'Volvo',
+    price: 550,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: null, // image to be added
+    description: 'Volvo Car Logo Key Chain — zinc alloy Volvo logo keychain.',
+  },
   // ── Custom Keychain — $8.50 ───────────────────────────────────
   {
     id: 'custom-keychain',
