@@ -320,7 +320,7 @@ const SHOP_PRODUCTS = [
     price: 0,
     category: 'Collectibles',
     emoji: '🃏',
-    image: 'IMG_20251020_093649550.jpg',
+    image: 'IMG_20251020_093655431.jpg',
     description: 'Rare collectible, message for inquiry.',
     comingSoon: true,
   },
