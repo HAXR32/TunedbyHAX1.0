@@ -492,10 +492,10 @@ function renderShop() {
     const card = document.createElement('article');
     card.className = 'shop-card';
 
-    const bannerContent = product.comingSoon
-      ? `<img class="shop-card-img" src="coming-soon.svg" alt="Coming Soon">`
-      : product.image
-        ? `<img class="shop-card-img" src="${escShop(product.image)}" alt="${escShop(product.name + (product.variant ? ' ' + product.variant : ''))}" loading="lazy">`
+    const bannerContent = product.image
+      ? `<img class="shop-card-img" src="${escShop(product.image)}" alt="${escShop(product.name + (product.variant ? ' ' + product.variant : ''))}" loading="lazy">`
+      : product.comingSoon
+        ? `<img class="shop-card-img" src="coming-soon.svg" alt="Coming Soon">`
         : `<span class="shop-card-emoji">${product.emoji}</span>`;
 
     const sizeSelector = (!product.comingSoon && product.sizes)
