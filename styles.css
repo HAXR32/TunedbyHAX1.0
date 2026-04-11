@@ -1349,6 +1349,17 @@ body {
 }
 
 /* ============================================================
+   TAB PANELS
+   ============================================================ */
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+  animation: fadeIn .2s ease;
+}
+
+/* ============================================================
    SITE NAVIGATION TABS
    ============================================================ */
 .site-tabs {
@@ -1382,7 +1393,10 @@ body {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   text-decoration: none;
+  background: none;
+  border: none;
   border-bottom: 3px solid transparent;
+  cursor: pointer;
   transition: color var(--transition), border-color var(--transition), background var(--transition);
   white-space: nowrap;
   margin-bottom: -2px;

@@ -276,9 +276,9 @@
     </p>
 
     <div class="hero-actions">
-      <a href="#shop" class="hero-shop-btn">🛒 SHOP NOW</a>
-      <a href="#shipping" class="hero-shipping-btn">📦 SHIPPING INFO</a>
-      <a href="#garage" class="hero-garage-btn">🚗 ENTER VIRTUAL GARAGE</a>
+      <button type="button" class="hero-shop-btn" data-tab="shop">🛒 SHOP NOW</button>
+      <button type="button" class="hero-shipping-btn" data-tab="shipping">📦 SHIPPING INFO</button>
+      <button type="button" class="hero-garage-btn" data-tab="garage">🚗 ENTER VIRTUAL GARAGE</button>
     </div>
 
     <div class="hero-instagram">
@@ -334,18 +334,19 @@
        SITE NAVIGATION TABS
   ═══════════════════════════════════════════════════════════ -->
   <nav class="site-tabs" id="siteTabs" aria-label="Site navigation">
-    <div class="tabs-inner">
-      <a href="#shop"     class="tab-link">🛒 Shop</a>
-      <a href="#gallery"  class="tab-link">🖼️ Gallery</a>
-      <a href="#garage"   class="tab-link">🚗 Virtual Garage</a>
-      <a href="#contact"  class="tab-link">📬 Contact Us</a>
-      <a href="#shipping" class="tab-link">📦 Shipping</a>
+    <div class="tabs-inner" role="tablist">
+      <button class="tab-link active" data-tab="shop" role="tab" aria-selected="true" aria-controls="tab-shop">🛒 Shop</button>
+      <button class="tab-link" data-tab="gallery" role="tab" aria-selected="false" aria-controls="tab-gallery">🖼️ Gallery</button>
+      <button class="tab-link" data-tab="garage" role="tab" aria-selected="false" aria-controls="tab-garage">🚗 Virtual Garage</button>
+      <button class="tab-link" data-tab="contact" role="tab" aria-selected="false" aria-controls="tab-contact">📬 Contact Us</button>
+      <button class="tab-link" data-tab="shipping" role="tab" aria-selected="false" aria-controls="tab-shipping">📦 Shipping</button>
     </div>
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════════
        SHOP SECTION
   ═══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel active" id="tab-shop" role="tabpanel" aria-labelledby="tab-btn-shop">
   <div class="section-divider" id="shop">
     <h2>🛒 SHOP TUNEDBYHAX</h2>
     <p>JDM,EURO,USDM collectibles, HAX-approved merch, and exclusive accessories — all shipped worldwide.</p>
@@ -364,10 +365,12 @@
       <!-- Product cards injected by payment.js -->
     </div>
   </section>
+  </div><!-- /tab-shop -->
 
   <!-- ═══════════════════════════════════════════════════════════
        GALLERY SECTION
   ═══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-gallery" role="tabpanel" aria-labelledby="tab-btn-gallery">
   <div class="section-divider" id="gallery">
     <h2>🖼️ GALLERY</h2>
     <p>A showcase of builds, meets, and HAX-approved rides.</p>
@@ -443,10 +446,12 @@
       </div>
     </div>
   </section>
+  </div><!-- /tab-gallery -->
 
   <!-- ═══════════════════════════════════════════════════════════
        SHIPPING &amp; HANDLING SECTION
   ═══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-shipping" role="tabpanel" aria-labelledby="tab-btn-shipping">
   <div class="section-divider" id="shipping">
     <h2>📦 SHIPPING &amp; HANDLING</h2>
     <p>Fast, secure delivery worldwide — HAX ships every order with care and precision.</p>
@@ -548,10 +553,12 @@
     </div>
 
   </section>
+  </div><!-- /tab-shipping -->
 
   <!-- ═══════════════════════════════════════════════════════════
        VIRTUAL GARAGE SECTION
   ═══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-garage" role="tabpanel" aria-labelledby="tab-btn-garage">
   <div class="section-divider" id="garage">
     <h2>🔧 VIRTUAL GARAGE</h2>
     <p>Track, customize, and manage your personal car collection — powered by HAX.</p>
@@ -623,6 +630,7 @@
     <h2>Your garage is empty</h2>
     <p>Hit <strong>+ Add Car</strong> above to park your first build.</p>
   </div>
+  </div><!-- /tab-garage -->
 
   <!-- ═══════════════════════════════════════════════════════════
        ADD / EDIT CAR MODAL
@@ -777,7 +785,7 @@
     <ul class="cart-items" id="cartItems"></ul>
     <div class="cart-empty hidden" id="cartEmpty">
       <p>Your cart is empty.</p>
-      <a href="#shop" class="btn btn-primary btn-sm">Browse Shop</a>
+      <button type="button" class="btn btn-primary btn-sm" data-tab="shop">Browse Shop</button>
     </div>
     <div class="cart-flyout-footer hidden" id="cartFooter">
       <div class="cart-flyout-total">
@@ -866,6 +874,7 @@
   <!-- ═══════════════════════════════════════════════════════════
        CONTACT US SECTION
   ═══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-contact" role="tabpanel" aria-labelledby="tab-btn-contact">
   <div class="section-divider" id="contact">
     <h2>📬 CONTACT US</h2>
     <p>Questions, collabs, or just want to talk cars? We'd love to hear from you.</p>
@@ -909,44 +918,51 @@
             title="TunedbyHAX Instagram Feed"
             style="width:100%;border:0;overflow:hidden;"></iframe>
   </section>
+  </div><!-- /tab-contact -->
 
   <script>
-    /* ── Active tab highlight on scroll ───────────────────────── */
+    /* ── Tab switching ─────────────────────────────────────────── */
     (function () {
-      var sections = ['shop', 'gallery', 'garage', 'contact', 'shipping'];
-      var tabLinks = document.querySelectorAll('.tab-link');
-      var ticking = false;
+      var tabPanels = document.querySelectorAll('.tab-panel');
+      var tabLinks  = document.querySelectorAll('.tab-link[data-tab]');
 
-      /* Cache section offsets and refresh on resize */
-      var offsets = {};
-      function cacheOffsets() {
-        sections.forEach(function (id) {
-          var el = document.getElementById(id);
-          offsets[id] = el ? el.offsetTop : 0;
-        });
-      }
-      cacheOffsets();
-      window.addEventListener('resize', cacheOffsets, { passive: true });
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      function setActive() {
-        var scrollY = window.scrollY + 100;
-        var active = '';
-        sections.forEach(function (id) {
-          if (offsets[id] <= scrollY) active = id;
+      function switchTab(name) {
+        tabPanels.forEach(function (p) { p.classList.remove('active'); });
+        tabLinks.forEach(function (t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
         });
-        tabLinks.forEach(function (a) {
-          var href = a.getAttribute('href');
-          a.classList.toggle('active', href === '#' + active);
-        });
-        ticking = false;
-      }
-      window.addEventListener('scroll', function () {
-        if (!ticking) {
-          requestAnimationFrame(setActive);
-          ticking = true;
+
+        var panel = document.getElementById('tab-' + name);
+        if (panel) panel.classList.add('active');
+
+        var btn = document.querySelector('.tab-link[data-tab="' + name + '"]');
+        if (btn) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
         }
-      }, { passive: true });
-      setActive();
+
+        /* Scroll to the tab bar, respecting reduced-motion preference */
+        var tabs = document.getElementById('siteTabs');
+        if (tabs) {
+          tabs.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'start'
+          });
+        }
+      }
+
+      /* Expose globally so other scripts can call it */
+      window.switchTab = switchTab;
+
+      /* Wire up all [data-tab] elements: tab buttons + hero buttons + "Browse Shop" */
+      document.querySelectorAll('[data-tab]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          switchTab(this.dataset.tab);
+        });
+      });
     })();
   </script>
 
