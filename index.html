@@ -245,6 +245,52 @@
     }
     .section-divider p { color: var(--text-muted); font-size: .95rem; max-width: 560px; margin: 0 auto; }
 
+    /* Instagram Feed Section */
+    .instagram-feed-section {
+      padding: 2rem 1.5rem 3rem;
+      background: var(--bg);
+      text-align: center;
+    }
+    .instagram-feed-section h2 {
+      font-family: 'Bebas Neue', 'Impact', 'Arial Black', fantasy, serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      letter-spacing: 2px;
+      margin-bottom: .75rem;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #dc1a2e 0%, #d4a520 60%, #f0f0f4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .instagram-feed-section p {
+      color: var(--text-muted);
+      font-size: .95rem;
+      margin-bottom: 1.5rem;
+    }
+    .instagram-feed-section a {
+      color: #d4a520;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .instagram-feed-section a:hover {
+      text-decoration: underline;
+    }
+    .instagram-feed-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      min-height: 600px;
+    }
+    .instagram-feed-wrapper iframe {
+      width: 100%;
+      height: auto;
+      min-height: 600px;
+      border: 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
     @media (max-width: 1024px) {
       /* background-attachment:fixed is broken on iOS Safari — use scroll instead */
       .hero { background-attachment: scroll; }
@@ -253,6 +299,12 @@
       .hero { padding: 2.5rem 1rem 2rem; }
       .hero-media img  { width: calc(50% - .75rem); min-width: 0; height: 120px; }
       .hero-media video { width: 100%; }
+      .instagram-feed-wrapper {
+        min-height: 500px;
+      }
+      .instagram-feed-wrapper iframe {
+        min-height: 500px;
+      }
     }
   </style>
 </head>
@@ -900,21 +952,20 @@
   <!-- ═══════════════════════════════════════════════════════════
        INSTAGRAM FEED WIDGET
   ═══════════════════════════════════════════════════════════ -->
-  <section style="padding:2rem 1.5rem 3rem;background:var(--bg);text-align:center;">
-    <h2 style="font-family:'Bebas Neue','Impact','Arial Black',fantasy,serif;font-size:clamp(1.5rem,4vw,2.5rem);letter-spacing:2px;margin-bottom:.75rem;text-transform:uppercase;background:linear-gradient(90deg,#dc1a2e 0%,#d4a520 60%,#f0f0f4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-      📸 LATEST FROM INSTAGRAM
-    </h2>
-    <p style="color:var(--text-muted);font-size:.95rem;margin-bottom:1.5rem;">
-      Follow <a href="https://www.instagram.com/m0rtalHAX" target="_blank" rel="noopener" style="color:#d4a520;font-weight:700;">@m0rtalHAX</a> for daily builds &amp; updates.
+  <section class="instagram-feed-section">
+    <h2>📸 LATEST FROM INSTAGRAM</h2>
+    <p>
+      Follow <a href="https://www.instagram.com/m0rtalHAX" target="_blank" rel="noopener">@m0rtalHAX</a> for daily builds &amp; updates.
     </p>
     <!-- LightWidget WIDGET -->
-    <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-    <iframe src="https://cdn.lightwidget.com/widgets/96d78324de1f520a9801ea616bf1f876.html"
-            scrolling="no"
-            allowtransparency="true"
-            class="lightwidget-widget"
-            title="TunedbyHAX Instagram Feed"
-            style="width:100%;border:0;overflow:hidden;"></iframe>
+    <div class="instagram-feed-wrapper">
+      <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+      <iframe src="https://cdn.lightwidget.com/widgets/96d78324de1f520a9801ea616bf1f876.html"
+              scrolling="no"
+              allowtransparency="true"
+              title="TunedbyHAX Instagram Feed">
+      </iframe>
+    </div>
   </section>
   </div><!-- /tab-contact -->
 
