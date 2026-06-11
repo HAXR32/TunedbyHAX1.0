@@ -97,7 +97,7 @@ const PRODUCTS = {
   'car-enthusiast-tee-wht':   { name: 'Car Enthusiast T-Shirt (White)',      price: 3000  },
   'car-enthusiast-tee-blk':   { name: 'Car Enthusiast T-Shirt (Black)',      price: 3000  },
   'tbh-cap':                  { name: 'TunedbyHAX Snapback Cap',             price: 3200  },
-  'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (5x)',  price: 500   },
+  'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (5x)',  price: 1000  },
   'jdm-diecast-sti':          { name: 'WRX STI Lego-Style Model Car',        price: 7500  },
   // JDM Turbo Keychains — $5.50 each
   'jdm-keychain-silver':      { name: 'JDM Turbo Keychain (Silver)',         price: 550   },
