@@ -120,11 +120,11 @@ const SHOP_PRODUCTS = [
     id: 'tbh-sticker-pack',
     name: 'Vinyl Sticker Pack',
     variant: 'Pack of 5',
-    price: 500,
+    price: 1000,
     category: 'Accessories',
     emoji: '🔖',
     image: 'jdm-vinyl-decal.svg',
-    description: 'PACK of 5 for 5.00 USD',
+    description: 'PACK of 5 for 10.00 USD',
   },
   {
     id: 'jdm-diecast-sti',
@@ -631,7 +631,7 @@ function renderCartItems() {
     li.innerHTML = `
       <span class="cart-item-emoji">${product.emoji}</span>
       <div class="cart-item-info">
-        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}${size ? ` <span class="cart-item-size">${escShop(size)}</span>` : ''}</div>
+        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}${size ? ` <span class="cart-item-size">[...]
         <div class="cart-item-price">${fmtPrice(product.price * qty)}</div>
       </div>
       <div class="cart-item-qty">
