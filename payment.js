@@ -273,13 +273,13 @@ const SHOP_PRODUCTS = [
   },
   {
     id: 'car-logo-keychain-volvo',
-    name: 'Car Logo Key Chain',
+    name: '3 PACK JUMBO CAR KEY CHAIN',
     variant: 'Volvo',
-    price: 550,
+    price: 3000,
     category: 'Accessories',
     emoji: '🔑',
     image: null, // image to be added
-    description: 'Volvo Car Logo Key Chain — zinc alloy Volvo logo keychain.',
+    description: 'Random Selection',
   },
   // ── Custom Keychain — $8.50 ───────────────────────────────────
   {
