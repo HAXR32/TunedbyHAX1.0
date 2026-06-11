@@ -111,7 +111,7 @@ const PRODUCTS = {
   'car-logo-keychain-mitsubishi': { name: 'Car Logo Keychain (Mitsubishi)', price: 550   },
   'car-logo-keychain-ford':       { name: 'Car Logo Key Chain (Ford)',      price: 550   },
   'car-logo-keychain-jeep':       { name: 'Car Logo Key Chain (Jeep)',      price: 550   },
-  'car-logo-keychain-volvo':      { name: 'Car Logo Key Chain (Volvo)',     price: 550   },
+  'car-logo-keychain-volvo':      { name: '3 PACK JUMBO CAR KEY CHAIN',     price: 3000  },
   // Custom Keychain — $8.50
   'custom-keychain':          { name: 'Custom Keychain (Custom Design)',     price: 850   },
   'tbh-poster-jdm':           { name: 'JDM Garage Poster (A2)',             price: 2200  },
