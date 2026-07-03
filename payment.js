@@ -449,6 +449,18 @@ const SHOP_PRODUCTS = [
     image: null, // image to be added
     description: 'Bulma DBZ character keychain — collectible for DBZ fans.',
   },
+  // ── Custom Car Key Chain — Jeep — $10.00 ──────────────────────
+  {
+    id: 'custom-car-keychain-jeep',
+    name: 'Custom Car Key Chain',
+    variant: 'Jeep',
+    price: 1000,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'coming-soon.svg',
+    description: 'Jeep Key Chain',
+    comingSoon: true,
+  },
 ];
 
 // ── Shipping rates (mirrors server.js SHIPPING_RATES) ─────────
