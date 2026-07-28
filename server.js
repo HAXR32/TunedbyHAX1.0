@@ -99,10 +99,6 @@ const PRODUCTS = {
   'tbh-cap':                  { name: 'TunedbyHAX Snapback Cap',             price: 3200  },
   'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (5x)',  price: 1000  },
   'jdm-diecast-sti':          { name: 'WRX STI Lego-Style Model Car',        price: 7500  },
-  // JDM Turbo Keychains — $5.50 each
-  'jdm-keychain-silver':      { name: 'JDM Turbo Keychain (Silver)',         price: 550   },
-  'jdm-keychain-gold':        { name: 'JDM Turbo Keychain (Gold)',           price: 550   },
-  'jdm-keychain-black':       { name: 'JDM Turbo Keychain (Black)',          price: 550   },
   // Car Logo Keychains — $5.50 each
   'car-logo-keychain-toyota':     { name: 'Car Logo Keychain (Toyota)',     price: 550   },
   'car-logo-keychain-honda':      { name: 'Car Logo Keychain (Honda)',      price: 550   },
@@ -111,7 +107,6 @@ const PRODUCTS = {
   'car-logo-keychain-mitsubishi': { name: 'Car Logo Keychain (Mitsubishi)', price: 550   },
   'car-logo-keychain-ford':       { name: 'Car Logo Key Chain (Ford)',      price: 550   },
   'car-logo-keychain-jeep':       { name: 'Car Logo Key Chain (Jeep)',      price: 550   },
-  'car-logo-keychain-volvo':      { name: '3 PACK JUMBO CAR KEY CHAIN',     price: 3000  },
   // Custom Keychain — $8.50
   'custom-keychain':          { name: 'Custom Keychain (Custom Design)',     price: 850   },
   'tbh-poster-jdm':           { name: 'JDM Garage Poster (A2)',             price: 2200  },

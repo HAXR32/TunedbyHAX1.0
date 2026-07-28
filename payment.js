@@ -136,40 +136,6 @@ const SHOP_PRODUCTS = [
     image: 'IMG_20260330_062247725~3.jpg',
     description: 'collectible cosplay car for Subaru enthusiasts',
   },
-  // ── JDM Turbo Keychains — $5.50 each ────────────────────────
-  {
-    id: 'jdm-keychain-silver',
-    name: 'JDM Turbo Keychain',
-    variant: 'Silver',
-    price: 550,
-    category: 'Accessories',
-    emoji: '🔑',
-    image: '8186218.jpg',
-    description: 'Zinc alloy turbo replica keychain in silver finish — the perfect JDM finishing touch.',
-    comingSoon: true,
-  },
-  {
-    id: 'jdm-keychain-gold',
-    name: 'JDM Turbo Keychain',
-    variant: 'Gold',
-    price: 550,
-    category: 'Accessories',
-    emoji: '🔑',
-    image: 'unnamed.jpg',
-    description: 'Zinc alloy turbo replica keychain in gold finish — a golden accent for any JDM build.',
-    comingSoon: true,
-  },
-  {
-    id: 'jdm-keychain-black',
-    name: 'JDM Turbo Keychain',
-    variant: 'Black',
-    price: 550,
-    category: 'Accessories',
-    emoji: '🔑',
-    image: 'IMG_20260322_132332~2.jpg',
-    description: 'Zinc alloy turbo replica keychain in black chrome — sleek and stealthy.',
-    comingSoon: true,
-  },
   // ── Car Logo Keychains — $5.50 each ──────────────────────────
   {
     id: 'car-logo-keychain-chevrolet',
@@ -270,16 +236,6 @@ const SHOP_PRODUCTS = [
     emoji: '🔑',
     image: null, // image to be added
     description: 'Jeep Car Logo Key Chain — zinc alloy Jeep logo keychain.',
-  },
-  {
-    id: 'car-logo-keychain-volvo',
-    name: '3 PACK JUMBO CAR KEY CHAIN',
-    variant: 'Volvo',
-    price: 3000,
-    category: 'Accessories',
-    emoji: '🔑',
-    image: null, // image to be added
-    description: 'Random Selection',
   },
   // ── Custom Keychain — $8.50 ───────────────────────────────────
   {
