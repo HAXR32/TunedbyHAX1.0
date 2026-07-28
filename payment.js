@@ -641,7 +641,7 @@ function renderCartItems() {
     li.innerHTML = `
       <span class="cart-item-emoji">${product.emoji}</span>
       <div class="cart-item-info">
-        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}${size ? ` <span class="cart-item-size">[...]
+        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}${size ? ` <span class="cart-item-size">[${escShop(size)}]</span>` : ''}</div>
         <div class="cart-item-price">${fmtPrice(product.price * qty)}</div>
       </div>
       <div class="cart-item-qty">
