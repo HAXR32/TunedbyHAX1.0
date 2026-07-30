@@ -39,28 +39,6 @@ const API_BASE_URL = '';
 // Products with an `image` property will show that image in the card banner.
 const SHOP_PRODUCTS = [
   {
-    id: 'tbh-hoodie-blk',
-    name: 'TunedbyHAX Hoodie',
-    variant: 'Black',
-    price: 5500,
-    category: 'Apparel',
-    emoji: '🧥',
-    sizes: ['Small', 'Medium', 'Large', 'Custom'],
-    description: 'Premium fleece hoodie — HAX logo embroidered on chest.',
-    comingSoon: true,
-  },
-  {
-    id: 'tbh-hoodie-grn',
-    name: 'TunedbyHAX Hoodie',
-    variant: 'Green',
-    price: 5500,
-    category: 'Apparel',
-    emoji: '🧥',
-    sizes: ['Small', 'Medium', 'Large', 'Custom'],
-    description: 'Premium fleece hoodie in signature HAX green.',
-    comingSoon: true,
-  },
-  {
     id: 'tbh-tee-wht',
     name: 'TunedbyHAX T-Shirt',
     variant: 'White',
@@ -103,17 +81,6 @@ const SHOP_PRODUCTS = [
     emoji: '👕',
     sizes: ['Small', 'Medium', 'Large'],
     description: 'Custom Car Enthusiast Tee',
-    comingSoon: true,
-  },
-  {
-    id: 'tbh-cap',
-    name: 'TunedbyHAX Snapback Cap',
-    variant: '',
-    price: 3200,
-    category: 'Apparel',
-    emoji: '🧢',
-    sizes: ['Small', 'Medium', 'Large', 'Custom'],
-    description: 'Structured snapback with embroidered HAX branding.',
     comingSoon: true,
   },
   {
@@ -674,7 +641,7 @@ function renderCartItems() {
     li.innerHTML = `
       <span class="cart-item-emoji">${product.emoji}</span>
       <div class="cart-item-info">
-        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}${size ? ` <span class="cart-item-size">[...]
+        <div class="cart-item-name">${escShop(product.name)}${product.variant ? ` <span class="cart-item-variant">${escShop(product.variant)}</span>` : ''}${size ? ` <span class="cart-item-size">[${escShop(size)}]</span>` : ''}</div>
         <div class="cart-item-price">${fmtPrice(product.price * qty)}</div>
       </div>
       <div class="cart-item-qty">
