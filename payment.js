@@ -219,7 +219,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: null, // image to be added
+    image: 'IMG_20260609_104435696.jpg',
     description: 'Subaru Car Logo Key Chain — zinc alloy Subaru logo keychain.',
   },
   {
@@ -229,7 +229,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: null, // image to be added
+    image: 'IMG_20260609_104743280.jpg',
     description: 'Ford Car Logo Key Chain — zinc alloy Ford logo keychain.',
   },
   {
@@ -239,7 +239,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: null, // image to be added
+    image: 'IMG_20260609_104602123.jpg',
     description: 'Jeep Car Logo Key Chain — zinc alloy Jeep logo keychain.',
   },
   // ── Custom Keychain — $8.50 ───────────────────────────────────
@@ -315,7 +315,7 @@ const SHOP_PRODUCTS = [
     price: 1000,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'dbz-keychain-1.jpg',
+    image: 'IMG_20260609_105015204.jpg',
     description: 'Rare collectible, message for inquiry.',
   },
   {
@@ -325,7 +325,7 @@ const SHOP_PRODUCTS = [
     price: 1000,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'dbz-keychain-2.jpg',
+    image: 'IMG_20260609_105029661.jpg',
     description: 'Rare collectible, message for inquiry.',
   },
   {
@@ -335,7 +335,7 @@ const SHOP_PRODUCTS = [
     price: 1000,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'dbz-keychain-3.jpg',
+    image: 'IMG_20260609_105052609.jpg',
     description: 'Rare collectible, message for inquiry.',
   },
   // ── Custom Car Key Chains — $10.00 each ──────────────────────
@@ -346,7 +346,7 @@ const SHOP_PRODUCTS = [
     price: 1000,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260403_055642.jpg',
+    image: 'IMG_20260609_105918569.jpg',
     description: 'Chevrolet Camaro custom car key chain.',
   },
   {
@@ -356,8 +356,18 @@ const SHOP_PRODUCTS = [
     price: 1000,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260403_055642.jpg',
+    image: 'IMG_20260609_110004310.jpg',
     description: 'Dodge Challenger custom car key chain.',
+  },
+  {
+    id: 'custom-car-keychain-bmw',
+    name: 'Custom Car Key Chain',
+    variant: 'BMW',
+    price: 1000,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'IMG_20260609_110328221_PORTRAIT.jpg',
+    description: 'BMW custom car key chain.',
   },
   {
     id: 'custom-car-keychain-3',
@@ -366,7 +376,7 @@ const SHOP_PRODUCTS = [
     price: 1000,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260403_055642.jpg',
+    image: 'IMG_20260609_110414730_PORTRAIT.jpg',
     description: 'Nissan 350Z custom car key chain.',
   },
   {

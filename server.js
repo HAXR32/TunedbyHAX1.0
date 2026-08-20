@@ -113,6 +113,16 @@ const PRODUCTS = {
   'dbz-keychain-vegeta':      { name: 'DBZ Keychain (Vegeta)',               price: 650   },
   'dbz-keychain-freeza':      { name: 'DBZ Keychain (Freeza)',               price: 650   },
   'dbz-keychain-bulma':       { name: 'DBZ Keychain (Bulma)',                price: 650   },
+  // DBZ Keychains $10.00 each
+  'dbz-keychain-1':           { name: 'DBZ Keychain (Variant 1)',            price: 1000  },
+  'dbz-keychain-2':           { name: 'DBZ Keychain (Variant 2)',            price: 1000  },
+  'dbz-keychain-3':           { name: 'DBZ Keychain (Variant 3)',            price: 1000  },
+  // Custom Car Key Chains — $10.00 each
+  'custom-car-keychain-1':    { name: 'Custom Car Key Chain (Chevrolet Camaro)', price: 1000 },
+  'custom-car-keychain-2':    { name: 'Custom Car Key Chain (Dodge Challenger)', price: 1000 },
+  'custom-car-keychain-bmw':  { name: 'Custom Car Key Chain (BMW)',              price: 1000 },
+  'custom-car-keychain-3':    { name: 'Custom Car Key Chain (Nissan 350Z)',      price: 1000 },
+  'custom-car-keychain-4':    { name: 'Custom Car Key Chain (Subaru WRX)',       price: 1000 },
 };
 
 // ── Helper: validate a cart from the request ──────────────────
