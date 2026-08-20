@@ -53,6 +53,24 @@ The shop uses [Stripe](https://stripe.com) for secure payment processing.
 
 5. Open `http://localhost:3000` in your browser
 
+### GitHub Pages deployment
+
+- The frontend published at `tunedbyhax.com` is the static site in:
+  - `/home/runner/work/TunedbyHAX1.0/TunedbyHAX1.0/index.html`
+  - `/home/runner/work/TunedbyHAX1.0/TunedbyHAX1.0/styles.css`
+  - `/home/runner/work/TunedbyHAX1.0/TunedbyHAX1.0/app.js`
+  - `/home/runner/work/TunedbyHAX1.0/TunedbyHAX1.0/payment.js`
+- `server.js` is **not** deployed by GitHub Pages. It must be deployed separately for checkout to work.
+- This repository now includes `/.github/workflows/deploy-pages.yml` for Pages deployments from `main`.
+- In repository **Settings → Pages**, set the source to **GitHub Actions** so the workflow can publish the site.
+- The repository root includes `/.nojekyll` so Pages serves the site as a plain static build.
+
+### Production checkout configuration
+
+- Set `<meta name="tunedbyhax-api-base-url" content="https://your-backend-origin">` in `/home/runner/work/TunedbyHAX1.0/TunedbyHAX1.0/index.html`
+- Set `<meta name="tunedbyhax-stripe-publishable-key" content="pk_live_...">` in `/home/runner/work/TunedbyHAX1.0/TunedbyHAX1.0/index.html`
+- Without those values, the storefront will still render on GitHub Pages, but checkout will stay disabled/misconfigured.
+
 ### Environment Variables
 
 | Variable | Required | Description |
@@ -94,4 +112,3 @@ To change rates or the free-shipping threshold, edit the `SHIPPING_RATES` / `FRE
 | `payment.js`  | Shop catalogue, shipping options, cart state, Stripe Payment Element integration |
 | `server.js`   | Express server — static files, shipping rates API, Stripe PaymentIntent API |
 | `package.json` | Node.js project manifest and scripts |
-
