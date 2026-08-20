@@ -6,17 +6,33 @@
 
 'use strict';
 
+function readMetaContent(name) {
+  if (typeof document === 'undefined') return '';
+  const meta = document.querySelector(`meta[name="${name}"]`);
+  return meta ? meta.content.trim() : '';
+}
+
+function normaliseApiBaseUrl(url) {
+  return String(url || '').trim().replace(/\/+$/, '');
+}
+
+function isLocalHostname(hostname) {
+  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+}
+
 // ── Stripe publishable key ─────────────────────────────────────
 // Replace with your actual Stripe publishable key.
 // The publishable key is safe to include in front-end code.
 // Never put the secret key here.
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_REPLACE_WITH_YOUR_STRIPE_PUBLISHABLE_KEY';
+const DEFAULT_STRIPE_PUBLISHABLE_KEY = 'pk_test_REPLACE_WITH_YOUR_STRIPE_PUBLISHABLE_KEY';
+const STRIPE_PUBLISHABLE_KEY =
+  readMetaContent('tunedbyhax-stripe-publishable-key') || DEFAULT_STRIPE_PUBLISHABLE_KEY;
 
 // Warn at runtime if the key has not been replaced
 if (STRIPE_PUBLISHABLE_KEY.includes('REPLACE_WITH')) {
   console.warn(
     '[TunedbyHAX] WARNING: Stripe publishable key is still a placeholder.\n' +
-    'Replace STRIPE_PUBLISHABLE_KEY in payment.js with your actual key from\n' +
+    'Set the tunedbyhax-stripe-publishable-key meta tag in index.html with your actual key from\n' +
     'https://dashboard.stripe.com/apikeys before accepting real payments.'
   );
 }
@@ -29,8 +45,30 @@ if (STRIPE_PUBLISHABLE_KEY.includes('REPLACE_WITH')) {
 // If the front-end is hosted on a static host (e.g. GitHub Pages) and
 // the backend is deployed separately, set this to the full origin of
 // the backend server, for example:
-//   const API_BASE_URL = 'https://api.tunedbyhax.com';
-const API_BASE_URL = '';
+//   <meta name="tunedbyhax-api-base-url" content="https://api.tunedbyhax.com">
+const API_BASE_URL = normaliseApiBaseUrl(readMetaContent('tunedbyhax-api-base-url'));
+
+function renderCheckoutConfigNotice() {
+  const notice = $('checkoutConfigNotice');
+  if (!notice) return;
+
+  const messages = [];
+  if (STRIPE_PUBLISHABLE_KEY.includes('REPLACE_WITH')) {
+    messages.push('Add your live Stripe publishable key to the tunedbyhax-stripe-publishable-key meta tag in index.html.');
+  }
+  if (!API_BASE_URL && !isLocalHostname(window.location.hostname)) {
+    messages.push('Deploy the payment backend separately and set tunedbyhax-api-base-url in index.html because GitHub Pages does not run server.js.');
+  }
+
+  if (messages.length === 0) {
+    notice.textContent = '';
+    notice.classList.add('hidden');
+    return;
+  }
+
+  notice.innerHTML = messages.map(escShop).join('<br>');
+  notice.classList.remove('hidden');
+}
 
 // ── Product catalogue (mirrors server.js) ─────────────────────
 // Prices in cents — displayed only, never sent to server.
@@ -790,6 +828,12 @@ async function initStripeElements() {
   mountEl.innerHTML = '<div class="payment-loading">Loading payment form…</div>';
 
   try {
+    if (STRIPE_PUBLISHABLE_KEY.includes('REPLACE_WITH')) {
+      throw new Error(
+        'Checkout is not configured yet. Add a real Stripe publishable key to the tunedbyhax-stripe-publishable-key meta tag in index.html.'
+      );
+    }
+
     // Create a PaymentIntent on our server
     const response = await fetch(API_BASE_URL + '/create-payment-intent', {
       method: 'POST',
@@ -808,7 +852,7 @@ async function initStripeElements() {
     if (!contentType.includes('application/json')) {
       throw new Error(
         `Payment server returned an unexpected response (HTTP ${response.status}). ` +
-        'Please ensure the backend server is running and API_BASE_URL is configured correctly.'
+        'GitHub Pages does not run server.js, so deploy the backend separately and set tunedbyhax-api-base-url in index.html.'
       );
     }
 
@@ -867,6 +911,8 @@ async function initStripeElements() {
     mountEl.innerHTML = '';
     const errEl = $('checkoutError');
     if (errEl) errEl.textContent = err.message;
+    const btn = $('checkoutSubmitBtn');
+    if (btn) btn.textContent = 'Pay Now';
     console.error('[TunedbyHAX] Payment init error:', err);
   }
 }
@@ -928,6 +974,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderShop();
   initCartEvents();
   initCheckoutEvents();
+  renderCheckoutConfigNotice();
   updateCartBadge();
 
   // Update submit button text when checkout total changes
