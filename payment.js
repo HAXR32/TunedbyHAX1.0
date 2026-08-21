@@ -389,49 +389,6 @@ const SHOP_PRODUCTS = [
     image: 'IMG_20260403_055642.jpg',
     description: 'Subaru WRX custom car key chain.',
   },
-  // ── DBZ Keychains — $6.50 each ──────────────────────────────
-  {
-    id: 'dbz-keychain-vegeta',
-    name: 'DBZ Keychain',
-    variant: 'Vegeta',
-    price: 650,
-    category: 'Accessories',
-    emoji: '🔑',
-    image: null, // image to be added
-    description: 'Vegeta DBZ character keychain — collectible for DBZ fans.',
-  },
-  {
-    id: 'dbz-keychain-freeza',
-    name: 'DBZ Keychain',
-    variant: 'Freeza',
-    price: 650,
-    category: 'Accessories',
-    emoji: '🔑',
-    image: null, // image to be added
-    description: 'Freeza DBZ character keychain — collectible for DBZ fans.',
-  },
-  {
-    id: 'dbz-keychain-bulma',
-    name: 'DBZ Keychain',
-    variant: 'Bulma',
-    price: 650,
-    category: 'Accessories',
-    emoji: '🔑',
-    image: null, // image to be added
-    description: 'Bulma DBZ character keychain — collectible for DBZ fans.',
-  },
-  // ── Custom Car Key Chain — Jeep — $10.00 ──────────────────────
-  {
-    id: 'custom-car-keychain-jeep',
-    name: 'Custom Car Key Chain',
-    variant: 'Jeep',
-    price: 1000,
-    category: 'Accessories',
-    emoji: '🔑',
-    image: 'coming-soon.svg',
-    description: 'Jeep Key Chain',
-    comingSoon: true,
-  },
 ];
 
 // ── Shipping rates (mirrors server.js SHIPPING_RATES) ─────────

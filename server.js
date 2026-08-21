@@ -109,10 +109,6 @@ const PRODUCTS = {
   'tbh-poster-jdm':           { name: 'JDM Garage Poster (A2)',             price: 2200  },
   // Custom License Plates — $100.00
   'custom-license-plate':     { name: 'Custom License Plates (License Plate Cover and/or Cosmetic for all vehicles)', price: 10000 },
-  // DBZ Keychains — $6.50 each
-  'dbz-keychain-vegeta':      { name: 'DBZ Keychain (Vegeta)',               price: 650   },
-  'dbz-keychain-freeza':      { name: 'DBZ Keychain (Freeza)',               price: 650   },
-  'dbz-keychain-bulma':       { name: 'DBZ Keychain (Bulma)',                price: 650   },
   // DBZ Keychains $10.00 each
   'dbz-keychain-1':           { name: 'DBZ Keychain (Variant 1)',            price: 1000  },
   'dbz-keychain-2':           { name: 'DBZ Keychain (Variant 2)',            price: 1000  },
