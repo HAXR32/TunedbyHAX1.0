@@ -149,7 +149,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260322_055524404.jpg',
+    image: 'IMG_20260609_105614680.jpg',
     description: 'Chevrolet Car Logo Key Chain — zinc alloy Chevy bowtie logo keychain.',
   },
   {
