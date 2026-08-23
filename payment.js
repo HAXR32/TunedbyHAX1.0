@@ -159,7 +159,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260322_055537068.jpg',
+    image: 'IMG_20260609_105322683.jpg',
     description: 'Audi Car Logo Key Chain — zinc alloy four-rings logo keychain.',
   },
   {
