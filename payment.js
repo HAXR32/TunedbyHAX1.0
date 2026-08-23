@@ -189,7 +189,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260322_055618348.jpg',
+    image: 'IMG_20260609_105204103.jpg',
     description: 'Black Volkswagen Car Logo Key Chain — zinc alloy VW logo keychain in black finish.',
   },
   {
