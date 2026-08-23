@@ -242,6 +242,16 @@ const SHOP_PRODUCTS = [
     image: 'IMG_20260609_104602123.jpg',
     description: 'Jeep Car Logo Key Chain — zinc alloy Jeep logo keychain.',
   },
+  {
+    id: 'car-logo-keychain-bmw',
+    name: 'Car Logo Key Chain',
+    variant: 'BMW',
+    price: 550,
+    category: 'Accessories',
+    emoji: '🔑',
+    image: 'IMG_20260609_105914962.jpg',
+    description: 'BMW keychain.',
+  },
   // ── Custom Keychain — $8.50 ───────────────────────────────────
   {
     id: 'custom-keychain',
