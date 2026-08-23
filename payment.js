@@ -179,7 +179,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260322_055604542.jpg',
+    image: 'IMG_20260609_105506833.jpg',
     description: 'Honda Car Logo Key Chain — zinc alloy Honda logo keychain, sleek and durable.',
   },
   {
