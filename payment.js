@@ -317,6 +317,7 @@ const SHOP_PRODUCTS = [
     category: 'Accessories',
     emoji: '🔑',
     image: 'IMG_20260609_105015204.jpg',
+    imageFit: 'contain',
     description: 'Rare collectible, message for inquiry.',
   },
   {
