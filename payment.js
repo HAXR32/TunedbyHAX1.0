@@ -169,7 +169,7 @@ const SHOP_PRODUCTS = [
     price: 550,
     category: 'Accessories',
     emoji: '🔑',
-    image: 'IMG_20260322_055548226.jpg',
+    image: 'IMG_20260609_105241352.jpg',
     description: 'Mazda Car Logo Key Chain — zinc alloy Mazda logo keychain.',
   },
   {
