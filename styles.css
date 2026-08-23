@@ -27,6 +27,13 @@
   --transition:  .18s ease;
   --font-display: 'Bebas Neue', 'Impact', 'Arial Black', fantasy, serif;
   --font-ui:      'Rajdhani', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --interactive-cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :root {
+    --interactive-cursor: url("charmander-cursor.svg") 4 4, pointer;
+  }
 }
 
 /* ---------- Reset ---------- */
@@ -98,7 +105,7 @@ body {
   padding: .55rem 1.15rem;
   border-radius: var(--radius-sm);
   border: none;
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
   font-size: .9rem;
   font-weight: 600;
   transition: background var(--transition), transform var(--transition), opacity var(--transition);
@@ -216,7 +223,7 @@ body {
   padding: .5rem .75rem;
   font-size: .85rem;
   outline: none;
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
 }
 
 /* ---------- Garage Grid ---------- */
@@ -388,7 +395,7 @@ body {
   border: none;
   color: var(--text-muted);
   font-size: 1.1rem;
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
   padding: .25rem .4rem;
   border-radius: var(--radius-sm);
   transition: background var(--transition), color var(--transition);
@@ -435,7 +442,7 @@ body {
 }
 .emoji-picker span {
   font-size: 1.6rem;
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
   padding: .2rem .3rem;
   border-radius: var(--radius-sm);
   border: 2px solid transparent;
@@ -515,7 +522,7 @@ body {
   background: none;
   border: none;
   color: var(--text-muted);
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
   font-size: .85rem;
   padding: .2rem .3rem;
   border-radius: var(--radius-sm);
@@ -719,7 +726,7 @@ body {
   border-radius: 6px;
   padding: .3rem .5rem;
   font-size: .82rem;
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
   transition: border-color var(--transition);
 }
 .shop-card-size-select:focus {
@@ -836,7 +843,7 @@ body {
   color: var(--text);
   width: 1.4rem;
   height: 1.4rem;
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
   font-size: .9rem;
   display: flex;
   align-items: center;
@@ -849,7 +856,7 @@ body {
   background: none;
   border: none;
   color: var(--text-muted);
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
   font-size: .85rem;
   padding: .2rem .3rem;
   border-radius: var(--radius-sm);
@@ -1422,7 +1429,7 @@ body {
   color: var(--text-muted);
   font-size: .9rem;
   font-weight: 600;
-  cursor: pointer;
+  cursor: var(--interactive-cursor);
   white-space: nowrap;
   border-bottom: 3px solid transparent;
   transition: color var(--transition), border-color var(--transition);
