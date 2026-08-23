@@ -656,6 +656,9 @@ body {
   display: block;
   transition: transform .3s ease;
 }
+.shop-card-img--contain {
+  object-fit: contain;
+}
 .shop-card:hover .shop-card-img {
   transform: scale(1.05);
 }
