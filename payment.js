@@ -160,6 +160,7 @@ const SHOP_PRODUCTS = [
     category: 'Accessories',
     emoji: '🔑',
     image: 'IMG_20260609_105322683.jpg',
+    imageFit: 'contain',
     description: 'Audi Car Logo Key Chain — zinc alloy four-rings logo keychain.',
   },
   {
@@ -474,7 +475,7 @@ function renderShop() {
     card.className = 'shop-card';
 
     const bannerContent = product.image
-      ? `<img class="shop-card-img" src="${escShop(product.image)}" alt="${escShop(product.name + (product.variant ? ' ' + product.variant : ''))}" loading="lazy">`
+      ? `<img class="shop-card-img${product.imageFit === 'contain' ? ' shop-card-img--contain' : ''}" src="${escShop(product.image)}" alt="${escShop(product.name + (product.variant ? ' ' + product.variant : ''))}" loading="lazy">`
       : product.comingSoon
         ? `<img class="shop-card-img" src="coming-soon.svg" alt="Coming Soon">`
         : `<span class="shop-card-emoji">${product.emoji}</span>`;
