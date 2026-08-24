@@ -102,7 +102,7 @@ const SHOP_PRODUCTS = [
   {
     id: 'car-enthusiast-tee-wht',
     name: 'Car Enthusiast Shirt Black',
-    variant: 'White',
+    variant: 'Black',
     price: 1800,
     category: 'Apparel',
     emoji: '👕',
