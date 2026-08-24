@@ -92,7 +92,7 @@ const MAX_ORDER_TOTAL_CENTS = 1_000_000;
 const PRODUCTS = {
   'tbh-tee-wht':              { name: 'TunedbyHAX T-Shirt (White)',          price: 2800  },
   'tbh-tee-blk':              { name: 'TunedbyHAX T-Shirt (Black)',          price: 2800  },
-  'car-enthusiast-tee-wht':   { name: 'Car Enthusiast Shirt White',          price: 1800  },
+  'car-enthusiast-tee-wht':   { name: 'Car Enthusiast Shirt Black',          price: 1800  },
   'car-enthusiast-tee-blk':   { name: 'Car Enthusiast Shirt Black',          price: 1600  },
   'tbh-sticker-pack':         { name: 'TunedbyHAX Vinyl Sticker Pack (5x)',  price: 1000  },
   'jdm-diecast-sti':          { name: 'WRX STI Lego-Style Model Car',        price: 7500  },

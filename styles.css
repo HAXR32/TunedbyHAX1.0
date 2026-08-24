@@ -34,6 +34,9 @@
   :root {
     --interactive-cursor: url("goku-cursor.svg") 2 25, pointer;
   }
+  body {
+    cursor: url("goku-cursor.svg") 2 25, auto;
+  }
 }
 
 /* ---------- Reset ---------- */

@@ -101,7 +101,7 @@ const SHOP_PRODUCTS = [
   // ── Car Enthusiast T-Shirt — $30.00 ──────────────────────────
   {
     id: 'car-enthusiast-tee-wht',
-    name: 'Car Enthusiast Shirt White',
+    name: 'Car Enthusiast Shirt Black',
     variant: 'Black',
     price: 1800,
     category: 'Apparel',
@@ -317,6 +317,7 @@ const SHOP_PRODUCTS = [
     category: 'Accessories',
     emoji: '🔑',
     image: 'IMG_20260609_105015204.jpg',
+    imageFit: 'contain',
     description: 'Rare collectible, message for inquiry.',
   },
   {
